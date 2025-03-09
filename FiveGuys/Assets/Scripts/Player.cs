@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public float minXP = 0f;
     public float xp;
     public GameObject enemy;
+    public GameObject bullet;
 
     public HealthBar healthBar;
     public XPBar xpBar;
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
     {
         Movement();
         HurtSelf();
+        ShootBullet();
     }
     
     //moves player
@@ -84,5 +86,11 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    void ShootBullet()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Instantiate(bullet, transform.position, transform.rotation);
+        }
+    }
 }
