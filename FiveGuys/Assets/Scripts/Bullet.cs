@@ -35,6 +35,7 @@ public class Bullet : MonoBehaviour
         { // destroy both enemy and bullet
             Destroy(other.gameObject);
             DeleteSelf();
+            GameObject.Find("Player").GetComponent<Player>().EarnXP(1);
         }
     }
 }

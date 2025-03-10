@@ -20,4 +20,12 @@ public class EnemyFollow : MonoBehaviour
         enemy.destination = player.position;
 
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            GameObject.Find("Player").GetComponent<Player>().Damage(1);
+        }
+    }
 }
