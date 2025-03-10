@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -15,26 +16,32 @@ public class Player : MonoBehaviour
     public float xp;
     public GameObject enemy;
     public GameObject bullet;
+    private int charLevel;
 
-    public HealthBar healthBar;
+    public Healthbar healthBar;
     public XPBar xpBar;
+
+    public TextMeshProUGUI levelUpText;
 
 
 
     void Start()
     {
+        charLevel = 1;
+        levelUpText.text = "Level: " + charLevel;
         xp = minXP;
         lives = maxLives;
         healthBar.SetMaxHealth(maxLives);
         xpBar.SetMinXP(minXP);
 
     }
+
+
    
     // Update is called once per frame
     void Update()
     {
         Movement();
-        HurtSelf();
         ShootBullet();
     }
     
@@ -47,42 +54,43 @@ public class Player : MonoBehaviour
     }
 
     //does damage to player in 1/3 increments
-    void Damage()
+     public void Damage(int damageAmount)
     {
-        lives--;
-
+        lives = lives - damageAmount;
         healthBar.SetHealth(lives);
 
-        if (lives == 0)
+        if (lives <= 0)
         {
             Destroy(this.gameObject);
         }
     }
 
-    //Temp function to showcase xp bar
-    void KillEnemy()
+    public void EarnXP(float xpAmount)
     {
-        Destroy(enemy.gameObject);
-        xp += .5f;
-
+        xp = xp + ((xpAmount / charLevel) * .5f);
         xpBar.SetXP(xp);
-    }
 
-    //Temp function to show health bar
-    void HurtSelf()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (xp == 1)
         {
-            Damage();
+            xp = minXP;
+            xpBar.SetXP(xp);
+            LevelUp();
+
         }
     }
 
-    //for now having the enemy die when collided to show off xp bar
-    void OnCollisionEnter(Collision collision)
+    public void LevelUp()
     {
-        if (collision.collider.tag == "Enemy")
+
+        if (xp == 1 && charLevel < 1)
         {
-            KillEnemy();
+            charLevel++;
+            levelUpText.text = "Level: " + charLevel;
+
+        } else
+        {
+            charLevel = 2;
+            levelUpText.text = "Level: " + charLevel;
         }
     }
 
