@@ -16,18 +16,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1677023595077821034, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
-      propertyPath: m_Value
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1677023595077821034, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
-      propertyPath: m_MaxValue
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2049208485379336208, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
-      propertyPath: maxEnemyLives
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 2194391332375969587, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.23
@@ -74,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6445442927300242572, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
       propertyPath: m_TagString
-      value: Tank
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

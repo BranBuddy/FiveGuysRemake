@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
         lives = maxLives;
         healthBar.SetMaxHealth(maxLives);
         xpBar.SetMinXP(minXP);
-
+        
     }
    
     // Update is called once per frame
@@ -70,10 +70,11 @@ public class Player : MonoBehaviour
         xp = xp + ((xpAmount / charLevel) * .5f);
         xpBar.SetXP(xp);
 
-        if (xp == 1)
+        if (xp >= 1)
         {
             xp = minXP;
             xpBar.SetXP(xp);
+            Debug.Log("lEVEL UP");
             LevelUp();
 
         }
@@ -82,7 +83,7 @@ public class Player : MonoBehaviour
     public void LevelUp()
     {
 
-        if (xp == 1 && charLevel < 1)
+        if (charLevel > 1)
         {
             charLevel++;
             levelUpText.text = "Level: " + charLevel;
