@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour
     public XPBar xpBar;
 
     public TextMeshProUGUI levelUpText;
+
+
 
 
 
@@ -61,7 +64,10 @@ public class Player : MonoBehaviour
 
         if (lives <= 0)
         {
+            
             Destroy(this.gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
         }
     }
 
