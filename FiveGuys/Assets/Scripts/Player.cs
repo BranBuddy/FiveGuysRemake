@@ -24,10 +24,6 @@ public class Player : MonoBehaviour
 
     public TextMeshProUGUI levelUpText;
 
-
-
-
-
     void Start()
     {
         charLevel = 1;
@@ -38,8 +34,6 @@ public class Player : MonoBehaviour
         xpBar.SetMinXP(minXP);
 
     }
-
-
    
     // Update is called once per frame
     void Update()
@@ -59,7 +53,7 @@ public class Player : MonoBehaviour
     //does damage to player in 1/3 increments
      public void Damage(int damageAmount)
     {
-        lives = lives - damageAmount;
+        lives -= damageAmount;
         healthBar.SetHealth(lives);
 
         if (lives <= 0)

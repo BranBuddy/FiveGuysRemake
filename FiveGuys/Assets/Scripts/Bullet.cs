@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
 {
     public string enemyTag = "Enemy";
     private GameObject targetEnemy;
+   
     
     void Start()
     {    
@@ -33,9 +34,9 @@ public class Bullet : MonoBehaviour
     {
         if (other.tag == enemyTag)
         { // destroy both enemy and bullet
-            Destroy(other.gameObject);
+            GameObject.FindWithTag("Enemy").GetComponent<EnemyFollow>().enemyDamaged(1);
             DeleteSelf();
-            GameObject.Find("Player").GetComponent<Player>().EarnXP(1);
+            
         }
     }
 }
