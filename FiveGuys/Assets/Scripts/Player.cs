@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     }
 
     //does damage to player in 1/3 increments
-     public void Damage(int damageAmount)
+     public void Damage(float damageAmount)
     {
         lives -= damageAmount;
         healthBar.SetHealth(lives);
