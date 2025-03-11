@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
         if (other.tag == enemyTag)
         { // destroy both enemy and bullet
             GameObject.FindWithTag("Enemy").GetComponent<EnemyFollow>().enemyDamaged(1);
-            GameObject.FindWithTag("Tank").GetComponent<EnemyFollow>().enemyDamaged(1);
+
             DeleteSelf();
             
         }

@@ -228,7 +228,7 @@ MonoBehaviour:
   player: {fileID: 0}
   healthBar: {fileID: 7010798790060403940}
   enemyLives: 0
-  maxEnemyLives: 3
+  maxEnemyLives: 5
   enemyType: 1
   speed: 0
 --- !u!195 &8837403279728674190
@@ -288,6 +288,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3277196153949296109}
     m_Modifications:
+    - target: {fileID: 1271351512272980517, guid: fafbb7d38999bef409a8474df39f2ea4, type: 3}
+      propertyPath: m_Value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1271351512272980517, guid: fafbb7d38999bef409a8474df39f2ea4, type: 3}
+      propertyPath: m_MaxValue
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1544124667160525043, guid: fafbb7d38999bef409a8474df39f2ea4, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
