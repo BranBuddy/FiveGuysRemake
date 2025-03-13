@@ -53,7 +53,7 @@ public class Bullet : MonoBehaviour
         mousePos.x = currentEvent.mousePosition.x;
         mousePos.y = cam.pixelHeight - currentEvent.mousePosition.y;
 
-        Vector3 target
+        Vector3 target = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
 
     }
 
