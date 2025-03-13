@@ -13,11 +13,12 @@ public class Player : MonoBehaviour
     public float maxLives = 3f;
     public float minXP = 0f;
     public float xp;
+    public bool autoFire = false;
     public GameObject enemy;
     public GameObject bullet;
 
-    public HealthBar healthBar;
-    public XPBar xpBar;
+    //public HealthBar healthBar;
+    //public XPBar xpBar;
 
 
 
@@ -25,8 +26,8 @@ public class Player : MonoBehaviour
     {
         xp = minXP;
         lives = maxLives;
-        healthBar.SetMaxHealth(maxLives);
-        xpBar.SetMinXP(minXP);
+        //healthBar.SetMaxHealth(maxLives);
+        //xpBar.SetMinXP(minXP);
 
     }
    
@@ -35,7 +36,20 @@ public class Player : MonoBehaviour
     {
         Movement();
         HurtSelf();
-        ShootBullet();
+        if (Input.GetKeyDown(KeyCode.Mouse0) && autoFire == false)
+        {
+            ShootBullet();
+        }
+        if (Input.GetKeyDown(KeyCode.E) && autoFire == false)
+        {
+            StartCoroutine("Autofire");
+            autoFire = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && autoFire == true)
+        {
+            StopCoroutine("Autofire");
+            autoFire = false;
+        }
     }
     
     //moves player
@@ -51,7 +65,7 @@ public class Player : MonoBehaviour
     {
         lives--;
 
-        healthBar.SetHealth(lives);
+       // healthBar.SetHealth(lives);
 
         if (lives == 0)
         {
@@ -65,7 +79,7 @@ public class Player : MonoBehaviour
         Destroy(enemy.gameObject);
         xp += .5f;
 
-        xpBar.SetXP(xp);
+        //xpBar.SetXP(xp);
     }
 
     //Temp function to show health bar
@@ -88,9 +102,16 @@ public class Player : MonoBehaviour
 
     void ShootBullet()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        Instantiate(bullet, transform.position, transform.rotation);        
+    }
+
+    IEnumerator Autofire()
+    {
+        while (true)
         {
             Instantiate(bullet, transform.position, transform.rotation);
+            Debug.Log("Fired");
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }
