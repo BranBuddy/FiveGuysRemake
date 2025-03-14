@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     public Healthbar healthBar;
     public XPBar xpBar;
 
+    public Vector2 turn;
+
     public TextMeshProUGUI levelUpText;
 
     void Start()
@@ -64,8 +66,10 @@ public class Player : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * Time.deltaTime * speed);
+
     }
 
+   
     //does damage to player in 1/3 increments
      public void Damage(float damageAmount)
     {
