@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -16,25 +18,40 @@ public class Player : MonoBehaviour
     public bool autoFire = false;
     public GameObject enemy;
     public GameObject bullet;
+    private int charLevel;
 
+<<<<<<< HEAD
     //public HealthBar healthBar;
     //public XPBar xpBar;
+=======
+    public Healthbar healthBar;
+    public XPBar xpBar;
+>>>>>>> main
 
-
+    public TextMeshProUGUI levelUpText;
 
     void Start()
     {
+        charLevel = 1;
+        levelUpText.text = "Level: " + charLevel;
         xp = minXP;
         lives = maxLives;
+<<<<<<< HEAD
         //healthBar.SetMaxHealth(maxLives);
         //xpBar.SetMinXP(minXP);
 
+=======
+        healthBar.SetMaxHealth(maxLives);
+        xpBar.SetMinXP(minXP);
+        
+>>>>>>> main
     }
    
     // Update is called once per frame
     void Update()
     {
         Movement();
+<<<<<<< HEAD
         HurtSelf();
         if (Input.GetKeyDown(KeyCode.Mouse0) && autoFire == false)
         {
@@ -50,6 +67,9 @@ public class Player : MonoBehaviour
             StopCoroutine("Autofire");
             autoFire = false;
         }
+=======
+        ShootBullet();
+>>>>>>> main
     }
     
     //moves player
@@ -61,42 +81,61 @@ public class Player : MonoBehaviour
     }
 
     //does damage to player in 1/3 increments
-    void Damage()
+     public void Damage(float damageAmount)
     {
+<<<<<<< HEAD
         lives--;
 
        // healthBar.SetHealth(lives);
+=======
+        lives -= damageAmount;
+        healthBar.SetHealth(lives);
+>>>>>>> main
 
-        if (lives == 0)
+        if (lives <= 0)
         {
+            
             Destroy(this.gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
         }
     }
 
-    //Temp function to showcase xp bar
-    void KillEnemy()
+    public void EarnXP(float xpAmount)
     {
+<<<<<<< HEAD
         Destroy(enemy.gameObject);
         xp += .5f;
 
         //xpBar.SetXP(xp);
     }
+=======
+        xp = xp + ((xpAmount / charLevel) * .5f);
+        xpBar.SetXP(xp);
+>>>>>>> main
 
-    //Temp function to show health bar
-    void HurtSelf()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (xp >= 1)
         {
-            Damage();
+            xp = minXP;
+            xpBar.SetXP(xp);
+            Debug.Log("lEVEL UP");
+            LevelUp();
+
         }
     }
 
-    //for now having the enemy die when collided to show off xp bar
-    void OnCollisionEnter(Collision collision)
+    public void LevelUp()
     {
-        if (collision.collider.tag == "Enemy")
+
+        if (charLevel > 1)
         {
-            KillEnemy();
+            charLevel++;
+            levelUpText.text = "Level: " + charLevel;
+
+        } else
+        {
+            charLevel = 2;
+            levelUpText.text = "Level: " + charLevel;
         }
     }
 

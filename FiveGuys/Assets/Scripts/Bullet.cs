@@ -7,12 +7,18 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public string enemyTag = "Enemy";
+<<<<<<< HEAD
     public float bulletSpeed = 10f;
     private float minDistance = Mathf.Infinity;
     private Transform targetEnemy = null;
     public Player player;
     private Camera cam;
 
+=======
+    private GameObject targetEnemy;
+   
+    
+>>>>>>> main
     void Start()
     {
         cam = Camera.main;
@@ -66,8 +72,14 @@ public class Bullet : MonoBehaviour
     {
         if (other.tag == enemyTag)
         { // destroy both enemy and bullet
+<<<<<<< HEAD
             //Destroy(other.gameObject);
+=======
+            GameObject.FindWithTag("Enemy").GetComponent<EnemyFollow>().enemyDamaged(1);
+
+>>>>>>> main
             DeleteSelf();
+            
         }
     }
 }

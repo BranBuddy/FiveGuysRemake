@@ -125,6 +125,7 @@ MonoBehaviour:
   maxLives: 3
   minXP: 0
   xp: 0
-  enemy: {fileID: 0}
-  healthBar: {fileID: 0}
-  xpBar: {fileID: 0}
+  enemy: {fileID: 6445442927300242572, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
+  bullet: {fileID: 6640773669498251117, guid: a4a0fd3044432db419595bcaf62ab478, type: 3}
+  healthBar: {fileID: 8891815048448472589, guid: 4983de399686e2d489e1cbfe894d8355, type: 3}
+  xpBar: {fileID: 5264275885621874870, guid: 79a4f802410103849b3dcfbc2f24dada, type: 3}
