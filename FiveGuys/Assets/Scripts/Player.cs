@@ -15,12 +15,13 @@ public class Player : MonoBehaviour
     public float maxLives = 3f;
     public float minXP = 0f;
     public float xp;
-    public GameObject enemy;
     public GameObject bullet;
     private int charLevel;
 
     public Healthbar healthBar;
     public XPBar xpBar;
+
+    public Vector2 turn;
 
     public TextMeshProUGUI levelUpText;
 
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
     {
         Movement();
         ShootBullet();
+ 
     }
     
     //moves player
@@ -48,8 +50,10 @@ public class Player : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * Time.deltaTime * speed);
+
     }
 
+   
     //does damage to player in 1/3 increments
      public void Damage(float damageAmount)
     {
