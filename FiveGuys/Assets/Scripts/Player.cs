@@ -20,13 +20,8 @@ public class Player : MonoBehaviour
     public GameObject bullet;
     private int charLevel;
 
-<<<<<<< HEAD
-    //public HealthBar healthBar;
-    //public XPBar xpBar;
-=======
     public Healthbar healthBar;
     public XPBar xpBar;
->>>>>>> main
 
     public TextMeshProUGUI levelUpText;
 
@@ -36,23 +31,17 @@ public class Player : MonoBehaviour
         levelUpText.text = "Level: " + charLevel;
         xp = minXP;
         lives = maxLives;
-<<<<<<< HEAD
-        //healthBar.SetMaxHealth(maxLives);
-        //xpBar.SetMinXP(minXP);
 
-=======
         healthBar.SetMaxHealth(maxLives);
         xpBar.SetMinXP(minXP);
         
->>>>>>> main
     }
    
     // Update is called once per frame
     void Update()
     {
         Movement();
-<<<<<<< HEAD
-        HurtSelf();
+        //HurtSelf();
         if (Input.GetKeyDown(KeyCode.Mouse0) && autoFire == false)
         {
             ShootBullet();
@@ -67,9 +56,6 @@ public class Player : MonoBehaviour
             StopCoroutine("Autofire");
             autoFire = false;
         }
-=======
-        ShootBullet();
->>>>>>> main
     }
     
     //moves player
@@ -83,14 +69,8 @@ public class Player : MonoBehaviour
     //does damage to player in 1/3 increments
      public void Damage(float damageAmount)
     {
-<<<<<<< HEAD
-        lives--;
-
-       // healthBar.SetHealth(lives);
-=======
         lives -= damageAmount;
         healthBar.SetHealth(lives);
->>>>>>> main
 
         if (lives <= 0)
         {
@@ -103,16 +83,8 @@ public class Player : MonoBehaviour
 
     public void EarnXP(float xpAmount)
     {
-<<<<<<< HEAD
-        Destroy(enemy.gameObject);
-        xp += .5f;
-
-        //xpBar.SetXP(xp);
-    }
-=======
         xp = xp + ((xpAmount / charLevel) * .5f);
         xpBar.SetXP(xp);
->>>>>>> main
 
         if (xp >= 1)
         {
