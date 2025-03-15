@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     public float maxLives = 3f;
     public float minXP = 0f;
     public float xp;
+    public bool autoFire = false;
+    public GameObject enemy;
     public GameObject bullet;
     private int charLevel;
 
@@ -31,6 +33,7 @@ public class Player : MonoBehaviour
         levelUpText.text = "Level: " + charLevel;
         xp = minXP;
         lives = maxLives;
+
         healthBar.SetMaxHealth(maxLives);
         xpBar.SetMinXP(minXP);
         
@@ -40,8 +43,21 @@ public class Player : MonoBehaviour
     void Update()
     {
         Movement();
-        ShootBullet();
- 
+        //HurtSelf();
+        if (Input.GetKeyDown(KeyCode.Mouse0) && autoFire == false)
+        {
+            ShootBullet();
+        }
+        if (Input.GetKeyDown(KeyCode.E) && autoFire == false)
+        {
+            StartCoroutine("Autofire");
+            autoFire = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && autoFire == true)
+        {
+            StopCoroutine("Autofire");
+            autoFire = false;
+        }
     }
     
     //moves player
@@ -101,9 +117,16 @@ public class Player : MonoBehaviour
 
     void ShootBullet()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        Instantiate(bullet, transform.position, transform.rotation);        
+    }
+
+    IEnumerator Autofire()
+    {
+        while (true)
         {
             Instantiate(bullet, transform.position, transform.rotation);
+            Debug.Log("Fired");
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }
