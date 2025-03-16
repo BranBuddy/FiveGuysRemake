@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,34 +7,51 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+
 public class Player : MonoBehaviour
 {
      private float horizontalInput;
      private float verticalInput;
-    public float speed = 5f;
+    public float speed = 6f;
     public float lives = 3f;
     public float maxLives = 3f;
     public float minXP = 0f;
+    public float maxSprint = 1f;
+    public float sprint;
     public float xp;
     public GameObject bullet;
     private int charLevel;
+    public float sprintCost;
 
     public Healthbar healthBar;
     public XPBar xpBar;
+    public SprintBar sprintBar;
 
-    public Vector2 turn;
+    public Image SprintBar;
+
+    public bool shouldLerp = false;
+    public float lerpSpeed = 2f;
+    float t = 0;
 
     public TextMeshProUGUI levelUpText;
 
+    public bool running;
+
+    private Coroutine recharge;
+    public float chargeRate;
+
+ 
     void Start()
     {
+        sprintCost = 1f;
         charLevel = 1;
         levelUpText.text = "Level: " + charLevel;
         xp = minXP;
         lives = maxLives;
         healthBar.SetMaxHealth(maxLives);
+        sprintBar.SetMaxSprint(maxSprint);
         xpBar.SetMinXP(minXP);
-        
+
     }
    
     // Update is called once per frame
@@ -41,7 +59,31 @@ public class Player : MonoBehaviour
     {
         Movement();
         ShootBullet();
- 
+        Sprinting();
+
+
+        if (running == true)
+        {
+            sprint -= sprintCost * Time.deltaTime;
+
+            
+
+            if (sprint == 0)
+            {
+                sprint = 0;
+            }
+
+            sprintBar.SetSprint(sprint);
+
+           if(recharge != null)
+            {
+                StopCoroutine(recharge);
+            }
+           recharge = StartCoroutine(RechargeSprint());
+
+        }
+
+
     }
     
     //moves player
@@ -53,7 +95,42 @@ public class Player : MonoBehaviour
 
     }
 
-   
+   void Sprinting()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speed *= 1.5f;
+
+            running = true;
+            Debug.Log(sprint);
+
+            
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift) || sprint <= 0)
+        {
+            speed = 6f;
+            running = false;
+
+        }
+
+        
+    }
+
+    private IEnumerator RechargeSprint()
+    {
+        yield return new WaitForSeconds(1f);
+        while (sprint < maxSprint)
+        {
+            sprint += chargeRate / 10f;
+            if (sprint > maxSprint)
+            {
+                sprint = maxSprint;
+            }
+            sprintBar.SetSprint(sprint);
+            yield return new WaitForSeconds(.1f);
+        }
+    }
+    
     //does damage to player in 1/3 increments
      public void Damage(float damageAmount)
     {
@@ -104,6 +181,15 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             Instantiate(bullet, transform.position, transform.rotation);
+        }
+    }
+
+    public void HealPlayer(int healthGained)
+    {
+        if (lives < maxLives)
+        {
+            lives += healthGained;
+            healthBar.SetHealth(lives);
         }
     }
 }
