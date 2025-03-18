@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,13 +5,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-
+using System.Security.Cryptography;
 
 public class Player : MonoBehaviour
 {
      private float horizontalInput;
      private float verticalInput;
-    public float speed = 6f;
+    public float speed = 5f;
     public float lives = 3f;
     public float maxLives = 3f;
     public float minXP = 0f;
@@ -29,11 +28,10 @@ public class Player : MonoBehaviour
     public XPBar xpBar;
     public SprintBar sprintBar;
 
-    public Image SprintBar;
+    public Image stamina;
 
-    public bool shouldLerp = false;
-    public float lerpSpeed = 2f;
-    float t = 0;
+
+    public Vector2 turn;
 
     public TextMeshProUGUI levelUpText;
 
@@ -42,18 +40,16 @@ public class Player : MonoBehaviour
     private Coroutine recharge;
     public float chargeRate;
 
- 
     void Start()
     {
-        sprintCost = 1f;
         charLevel = 1;
         levelUpText.text = "Level: " + charLevel;
         xp = minXP;
         lives = maxLives;
 
         healthBar.SetMaxHealth(maxLives);
-        sprintBar.SetMaxSprint(maxSprint);
         xpBar.SetMinXP(minXP);
+        sprintBar.SetSprint(sprint);
 
     }
    
@@ -61,16 +57,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         Movement();
-<<<<<<< HEAD
-        ShootBullet();
-        Sprinting();
 
+        Sprinting();
 
         if (running == true)
         {
             sprint -= sprintCost * Time.deltaTime;
-
-            
 
             if (sprint == 0)
             {
@@ -87,9 +79,6 @@ public class Player : MonoBehaviour
 
         }
 
-
-=======
-        //HurtSelf();
         if (Input.GetKeyDown(KeyCode.Mouse0) && autoFire == false)
         {
             ShootBullet();
@@ -104,7 +93,6 @@ public class Player : MonoBehaviour
             StopCoroutine("Autofire");
             autoFire = false;
         }
->>>>>>> main
     }
     
     //moves player
@@ -116,16 +104,18 @@ public class Player : MonoBehaviour
 
     }
 
-   void Sprinting()
+    void Sprinting()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             speed *= 1.5f;
 
+            sprint -= sprintCost;
+
             running = true;
             Debug.Log(sprint);
 
-            
+            sprintBar.SetSprint(sprint);
         }
         if (Input.GetKeyUp(KeyCode.LeftShift) || sprint <= 0)
         {
@@ -134,7 +124,7 @@ public class Player : MonoBehaviour
 
         }
 
-        
+
     }
 
     private IEnumerator RechargeSprint()
@@ -151,9 +141,9 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(.1f);
         }
     }
-    
+
     //does damage to player in 1/3 increments
-     public void Damage(float damageAmount)
+    public void Damage(float damageAmount)
     {
         lives -= damageAmount;
         healthBar.SetHealth(lives);
@@ -201,7 +191,6 @@ public class Player : MonoBehaviour
     {
         Instantiate(bullet, transform.position, transform.rotation);        
     }
-
     IEnumerator Autofire()
     {
         while (true)
@@ -211,7 +200,6 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
     }
-
     public void HealPlayer(int healthGained)
     {
         if (lives < maxLives)
