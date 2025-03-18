@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     public XPBar xpBar;
     public SprintBar sprintBar;
 
-    public Image SprintBar;
+    public Image stamina;
 
 
     public Vector2 turn;
@@ -49,7 +49,8 @@ public class Player : MonoBehaviour
 
         healthBar.SetMaxHealth(maxLives);
         xpBar.SetMinXP(minXP);
-        
+        sprintBar.SetSprint(sprint);
+
     }
    
     // Update is called once per frame
@@ -57,16 +58,11 @@ public class Player : MonoBehaviour
     {
         Movement();
 
-        ShootBullet();
-
         Sprinting();
-
 
         if (running == true)
         {
             sprint -= sprintCost * Time.deltaTime;
-
-            
 
             if (sprint == 0)
             {
@@ -81,6 +77,21 @@ public class Player : MonoBehaviour
             }
            recharge = StartCoroutine(RechargeSprint());
 
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && autoFire == false)
+        {
+            ShootBullet();
+        }
+        if (Input.GetKeyDown(KeyCode.E) && autoFire == false)
+        {
+            StartCoroutine("Autofire");
+            autoFire = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && autoFire == true)
+        {
+            StopCoroutine("Autofire");
+            autoFire = false;
         }
     }
     
@@ -99,10 +110,12 @@ public class Player : MonoBehaviour
         {
             speed *= 1.5f;
 
+            sprint -= sprintCost;
+
             running = true;
             Debug.Log(sprint);
 
-
+            sprintBar.SetSprint(sprint);
         }
         if (Input.GetKeyUp(KeyCode.LeftShift) || sprint <= 0)
         {
@@ -177,5 +190,22 @@ public class Player : MonoBehaviour
     void ShootBullet()
     {
         Instantiate(bullet, transform.position, transform.rotation);        
+    }
+    IEnumerator Autofire()
+    {
+        while (true)
+        {
+            Instantiate(bullet, transform.position, transform.rotation);
+            Debug.Log("Fired");
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+    public void HealPlayer(int healthGained)
+    {
+        if (lives < maxLives)
+        {
+            lives += healthGained;
+            healthBar.SetHealth(lives);
+        }
     }
 }
