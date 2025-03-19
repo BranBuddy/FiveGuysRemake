@@ -147,4 +147,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTag: Enemy
-  player: {fileID: 3753665278524192808, guid: bd4481214d1781f4db16b3e788f9412d, type: 3}
+  player: {fileID: 0}
+  autoFire: 0
