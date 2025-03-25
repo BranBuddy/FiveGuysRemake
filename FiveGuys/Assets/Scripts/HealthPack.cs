@@ -21,7 +21,7 @@ public class HealthPack : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GameObject.FindWithTag("Player").GetComponent<Player>().HealPlayer(1);
+            GameObject.FindWithTag("Player").GetComponent<PlayerScript>().HealPlayer(1);
             StartCoroutine(respawnItem());
 
         }
