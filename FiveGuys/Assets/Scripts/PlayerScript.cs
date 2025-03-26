@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Security.Cryptography;
+using Cinemachine;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -19,10 +20,13 @@ public class PlayerScript : MonoBehaviour
     public float sprint;
     public float xp;
     public bool autoFire;
-    public GameObject enemy;
     public GameObject bulletPrefab;
     private int charLevel;
     public float sprintCost;
+
+
+    public AudioClip levelUpClip;
+    public AudioClip bulletClip;
 
     public Healthbar healthBar;
     public XPBar xpBar;
@@ -47,9 +51,12 @@ public class PlayerScript : MonoBehaviour
         lives = maxLives;
         autoFire = false;
 
+
         healthBar.SetMaxHealth(maxLives);
         xpBar.SetMinXP(minXP);
         sprintBar.SetSprint(sprint);
+
+
 
     }
    
@@ -150,9 +157,10 @@ public class PlayerScript : MonoBehaviour
 
         if (lives <= 0)
         {
-            
             Destroy(this.gameObject);
+            StartCoroutine(WaitForDeath());
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            
 
         }
     }
@@ -168,6 +176,7 @@ public class PlayerScript : MonoBehaviour
             xpBar.SetXP(xp);
             Debug.Log("lEVEL UP");
             LevelUp();
+            AudioSource.PlayClipAtPoint(levelUpClip, transform.position, .7f);
 
         }
     }
@@ -189,17 +198,26 @@ public class PlayerScript : MonoBehaviour
 
     void ShootbulletPrefab()
     {
-        Instantiate(bulletPrefab, transform.position, transform.rotation);        
+        Instantiate(bulletPrefab, transform.position, transform.rotation); 
+        AudioSource.PlayClipAtPoint(bulletClip, transform.position, .7f);
     }
     IEnumerator Autofire()
     {
         while (true)
         {
             Instantiate(bulletPrefab, transform.position, transform.rotation);
+            AudioSource.PlayClipAtPoint(bulletClip, transform.position, .7f);
             //Debug.Log("Fired");
             yield return new WaitForSeconds(0.5f);
         }
     }
+
+    IEnumerator WaitForDeath()
+    {
+        yield return new WaitForSeconds(3f);
+        
+    }
+
     public void HealPlayer(int healthGained)
     {
         if (lives < maxLives)
@@ -208,4 +226,5 @@ public class PlayerScript : MonoBehaviour
             healthBar.SetHealth(lives);
         }
     }
+
 }
