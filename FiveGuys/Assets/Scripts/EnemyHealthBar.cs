@@ -6,7 +6,6 @@ public class EnemyHealthBar : MonoBehaviour
 {
 
     public Slider slider;
-    public Camera camera;
     public Transform target;
     public Vector3 offset;
 
@@ -24,7 +23,7 @@ public class EnemyHealthBar : MonoBehaviour
 
     void Update()
     {
-        transform.rotation = camera.transform.rotation;
-        transform.position = target.position + offset; 
+         transform.position = target.position + offset;
+        transform.rotation = Camera.main.transform.rotation;
     }
 }
