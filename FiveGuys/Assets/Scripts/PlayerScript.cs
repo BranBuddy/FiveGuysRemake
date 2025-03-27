@@ -10,7 +10,7 @@ using Cinemachine;
 
 public class PlayerScript : MonoBehaviour
 {
-     private float horizontalInput;
+    private float horizontalInput;
      private float verticalInput;
     public float speed = 5f;
     public float lives = 3f;
@@ -21,7 +21,7 @@ public class PlayerScript : MonoBehaviour
     public float xp;
     public bool autoFire;
     public GameObject bulletPrefab;
-    private int charLevel;
+    public int charLevel;
     public float sprintCost;
 
 
@@ -33,8 +33,6 @@ public class PlayerScript : MonoBehaviour
     public SprintBar sprintBar;
 
     public Image stamina;
-
-    public Vector2 turn;
 
     public TextMeshProUGUI levelUpText;
 
