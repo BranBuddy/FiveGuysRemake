@@ -133,6 +133,7 @@ MonoBehaviour:
   xp: 0
   autoFire: 1
   bulletPrefab: {fileID: 6640773669498251117, guid: a4a0fd3044432db419595bcaf62ab478, type: 3}
+  charLevel: 0
   sprintCost: 0.1
   levelUpClip: {fileID: 8300000, guid: 079684a180a65a441a781cb9452962c5, type: 3}
   bulletClip: {fileID: 8300000, guid: 3e09d5d0d5656404cad5fc95599f5daa, type: 3}
@@ -140,7 +141,6 @@ MonoBehaviour:
   xpBar: {fileID: 4844057914127458486}
   sprintBar: {fileID: 3062423094609564378}
   stamina: {fileID: 6405253217186625386}
-  turn: {x: 0, y: 0}
   levelUpText: {fileID: 6126155492035858256}
   running: 0
   chargeRate: 0.33
@@ -238,11 +238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439c4a89a4c7fed4cbdb164330053c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
   weapon: {fileID: 8736661624135057884}
   CanAttack: 1
   attackCooldown: 1
-  enemyTag: Enemy
   weaponHolder: {fileID: 2663891026656204114}
 --- !u!1 &7778505815469485224
 GameObject:
@@ -488,6 +486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4befcb3ebbf9bf443a002b454384b467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponType: 0
 --- !u!1001 &736331962823290880
 PrefabInstance:
   m_ObjectHideFlags: 0
