@@ -6,14 +6,13 @@ using static Cinemachine.DocumentationSortingAttribute;
 
 public class EnemyFollow : MonoBehaviour
 {
-    public GameObject player;
+    public Transform player;
     public EnemyHealthBar healthBar;
     public float enemyLives;
     public float maxEnemyLives;
     public int enemyType;
     public float speed;
     private Rigidbody rb;
-    public AudioClip deathClip;
 
     private PlayerScript playerScript;
 
@@ -37,7 +36,7 @@ public class EnemyFollow : MonoBehaviour
 // Update is called once per frame
 void Update()
     {
-        enemy.SetDestination(player.transform.position);
+        enemy.SetDestination(player.position);
         WhatEnemyTypeAmI();
 
 
@@ -47,15 +46,15 @@ void Update()
     {
         if (other.tag == "Player" && enemyType == 0)
         {
-            GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().Damage(1);
+            GameObject.Find("Player").GetComponent<PlayerScript>().Damage(1);
         }
         else if (other.tag == "Player" && enemyType == 1)
         {
-            GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().Damage(2);
+            GameObject.Find("Player").GetComponent<PlayerScript>().Damage(2);
         }
         else if (other.tag == "Player" && enemyType == 2)
         {
-            GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().Damage(.5f);
+            GameObject.Find("Player").GetComponent<PlayerScript>().Damage(.5f);
         }
         else if (other.tag == "Player" && enemyType == 3)
         {
@@ -72,9 +71,8 @@ void Update()
 
             if (enemyLives <= 0)
             {
-                AudioSource.PlayClipAtPoint(deathClip, transform.position, .7f);
                 Destroy(this.gameObject);
-                GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().EarnXP(.5f);
+                GameObject.Find("Player").GetComponent<PlayerScript>().EarnXP(.5f);
             }
         }
         //tank enemy
@@ -85,9 +83,8 @@ void Update()
 
             if (enemyLives <= 0)
             {
-                AudioSource.PlayClipAtPoint(deathClip, transform.position, .7f);
                 Destroy(this.gameObject);
-                GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().EarnXP(1f);
+                GameObject.Find("Player").GetComponent<PlayerScript>().EarnXP(1f);
             }
         }
         //rushdown enemy
@@ -98,9 +95,8 @@ void Update()
 
             if (enemyLives <= 0)
             {
-                AudioSource.PlayClipAtPoint(deathClip, transform.position, .7f);
                 Destroy(this.gameObject);
-                GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().EarnXP(1.5f);
+                GameObject.Find("Player").GetComponent<PlayerScript>().EarnXP(1.5f);
             }
         }
         else if (enemyType == 3)
@@ -108,16 +104,15 @@ void Update()
             
             maxEnemyLives = 1;
             enemy.speed = 12f;
-            Vector3 direction = transform.position - player.transform.position;
+            Vector3 direction = transform.position - player.position;
             direction.Normalize();
 
             rb.velocity = direction * enemy.speed;
 
             if (enemyLives <= 0)
             {
-                AudioSource.PlayClipAtPoint(deathClip, transform.position, .7f);
                 Destroy(this.gameObject);
-                GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().EarnXP(2);
+                GameObject.Find("Player").GetComponent<PlayerScript>().EarnXP(2);
             }
         }
     }
