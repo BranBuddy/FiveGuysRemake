@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
         SpawnPlayer();
         SpawnEnemy();
         SpawnEnemy();
-        SpawnEnemy();
         CameraFollow();
 
     }
