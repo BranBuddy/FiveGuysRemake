@@ -15,6 +15,8 @@ public class EnemyFollow : MonoBehaviour
     private Rigidbody rb;
     public AudioClip deathClip;
 
+    private PlayerScript playerScript;
+
 
     private NavMeshAgent enemy;
     // Start is called before the first frame update
@@ -26,11 +28,14 @@ public class EnemyFollow : MonoBehaviour
         enemy.speed = speed;
         enemyLives = maxEnemyLives;
         healthBar.SetMaxHealth(maxEnemyLives);
+        playerScript = GameObject.Find("Player(Clone)").GetComponent<PlayerScript>();
+
+        
         
     }
 
-    // Update is called once per frame
-    void Update()
+// Update is called once per frame
+void Update()
     {
         enemy.SetDestination(player.transform.position);
         WhatEnemyTypeAmI();
@@ -63,6 +68,7 @@ public class EnemyFollow : MonoBehaviour
         //base enemy
         if(enemyType == 0)
         {
+            maxEnemyLives = 3 * playerScript.charLevel;
 
             if (enemyLives <= 0)
             {
@@ -75,7 +81,7 @@ public class EnemyFollow : MonoBehaviour
         else if (enemyType == 1)
         {
             enemy.speed = 3;
-            maxEnemyLives = 5;
+            maxEnemyLives = 5 * playerScript.charLevel;
 
             if (enemyLives <= 0)
             {
@@ -87,7 +93,7 @@ public class EnemyFollow : MonoBehaviour
         //rushdown enemy
         else if (enemyType == 2)
         {
-            maxEnemyLives = 2;
+            maxEnemyLives = 2 * playerScript.charLevel;
             enemy.speed = 10 - (enemyLives * 2);
 
             if (enemyLives <= 0)
