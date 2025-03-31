@@ -6,11 +6,10 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Security.Cryptography;
-using Cinemachine;
 
 public class PlayerScript : MonoBehaviour
 {
-    private float horizontalInput;
+     private float horizontalInput;
      private float verticalInput;
     public float speed = 5f;
     public float lives = 3f;
@@ -20,19 +19,18 @@ public class PlayerScript : MonoBehaviour
     public float sprint;
     public float xp;
     public bool autoFire;
+    public GameObject enemy;
     public GameObject bulletPrefab;
-    public int charLevel;
+    private int charLevel;
     public float sprintCost;
-
-
-    public AudioClip levelUpClip;
-    public AudioClip bulletClip;
 
     public Healthbar healthBar;
     public XPBar xpBar;
     public SprintBar sprintBar;
 
     public Image stamina;
+
+    public Vector2 turn;
 
     public TextMeshProUGUI levelUpText;
 
@@ -49,12 +47,9 @@ public class PlayerScript : MonoBehaviour
         lives = maxLives;
         autoFire = false;
 
-
         healthBar.SetMaxHealth(maxLives);
         xpBar.SetMinXP(minXP);
         sprintBar.SetSprint(sprint);
-
-
 
     }
    
@@ -155,10 +150,9 @@ public class PlayerScript : MonoBehaviour
 
         if (lives <= 0)
         {
-            Destroy(this.gameObject);
-            StartCoroutine(WaitForDeath());
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             
+            Destroy(this.gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
         }
     }
@@ -174,7 +168,6 @@ public class PlayerScript : MonoBehaviour
             xpBar.SetXP(xp);
             Debug.Log("lEVEL UP");
             LevelUp();
-            AudioSource.PlayClipAtPoint(levelUpClip, transform.position, .7f);
 
         }
     }
@@ -196,26 +189,17 @@ public class PlayerScript : MonoBehaviour
 
     void ShootbulletPrefab()
     {
-        Instantiate(bulletPrefab, transform.position, transform.rotation); 
-        AudioSource.PlayClipAtPoint(bulletClip, transform.position, .7f);
+        Instantiate(bulletPrefab, transform.position, transform.rotation);        
     }
     IEnumerator Autofire()
     {
         while (true)
         {
             Instantiate(bulletPrefab, transform.position, transform.rotation);
-            AudioSource.PlayClipAtPoint(bulletClip, transform.position, .7f);
             //Debug.Log("Fired");
             yield return new WaitForSeconds(0.5f);
         }
     }
-
-    IEnumerator WaitForDeath()
-    {
-        yield return new WaitForSeconds(3f);
-        
-    }
-
     public void HealPlayer(int healthGained)
     {
         if (lives < maxLives)
@@ -224,5 +208,4 @@ public class PlayerScript : MonoBehaviour
             healthBar.SetHealth(lives);
         }
     }
-
 }

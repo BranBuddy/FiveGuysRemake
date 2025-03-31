@@ -225,13 +225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9a91ac6dab2a1459473fd625d58f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1072373346703047333, guid: bd4481214d1781f4db16b3e788f9412d, type: 3}
+  player: {fileID: 0}
   healthBar: {fileID: 7010798790060403940}
   enemyLives: 0
-  maxEnemyLives: 3
-  enemyType: 0
+  maxEnemyLives: 5
+  enemyType: 1
   speed: 0
-  deathClip: {fileID: 8300000, guid: d4951a63a24d3d0448be77d870fd5b19, type: 3}
 --- !u!195 &8837403279728674190
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -439,6 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1677023595077821034}
+  camera: {fileID: 0}
   target: {fileID: 2194391332375969587}
   offset: {x: 0, y: 1.5, z: 0}
 --- !u!224 &4894259335749761198 stripped
