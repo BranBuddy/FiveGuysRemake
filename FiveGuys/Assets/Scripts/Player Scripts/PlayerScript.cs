@@ -21,7 +21,7 @@ public class PlayerScript : MonoBehaviour
     public float xp;
     public bool autoFire;
     public GameObject bulletPrefab;
-    private int charLevel;
+    public int charLevel;
     public float sprintCost;
 
 

@@ -14,6 +14,7 @@ public class EnemyFollow : MonoBehaviour
     public float speed;
     private Rigidbody rb;
     public AudioClip deathClip;
+    public PlayerScript playerScript;
 
 
     private NavMeshAgent enemy;
@@ -26,6 +27,7 @@ public class EnemyFollow : MonoBehaviour
         enemy.speed = speed;
         enemyLives = maxEnemyLives;
         healthBar.SetMaxHealth(maxEnemyLives);
+        playerScript = GetComponent<PlayerScript>();
         
     }
 
@@ -64,6 +66,8 @@ public class EnemyFollow : MonoBehaviour
         if(enemyType == 0)
         {
 
+            maxEnemyLives = playerScript.charLevel * 3;
+
             if (enemyLives <= 0)
             {
                 AudioSource.PlayClipAtPoint(deathClip, transform.position, .7f);
@@ -75,7 +79,7 @@ public class EnemyFollow : MonoBehaviour
         else if (enemyType == 1)
         {
             enemy.speed = 3;
-            maxEnemyLives = 5;
+            maxEnemyLives = playerScript.charLevel * 5;
 
             if (enemyLives <= 0)
             {
@@ -87,7 +91,7 @@ public class EnemyFollow : MonoBehaviour
         //rushdown enemy
         else if (enemyType == 2)
         {
-            maxEnemyLives = 2;
+            maxEnemyLives = playerScript.charLevel * 2;
             enemy.speed = 10 - (enemyLives * 2);
 
             if (enemyLives <= 0)
@@ -100,19 +104,7 @@ public class EnemyFollow : MonoBehaviour
         else if (enemyType == 3)
         {
             
-            maxEnemyLives = 1;
-            enemy.speed = 12f;
-            Vector3 direction = transform.position - player.transform.position;
-            direction.Normalize();
-
-            rb.velocity = direction * enemy.speed;
-
-            if (enemyLives <= 0)
-            {
-                AudioSource.PlayClipAtPoint(deathClip, transform.position, .7f);
-                Destroy(this.gameObject);
-                GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().EarnXP(2);
-            }
+            
         }
     }
 
