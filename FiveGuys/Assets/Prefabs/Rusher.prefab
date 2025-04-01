@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1408666061756518588, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1408666061756518588, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1677023595077821034, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
       propertyPath: m_Value
@@ -34,6 +34,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2049208485379336208, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
       propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049208485379336208, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
+      propertyPath: enemyLives
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2049208485379336208, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
@@ -110,7 +114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6445442927300242572, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6445442927300242572, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
       propertyPath: m_TagString

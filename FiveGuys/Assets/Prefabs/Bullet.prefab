@@ -147,5 +147,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTag: Enemy
-  player: {fileID: 0}
   autoFire: 0
+  bulletSpeed: 25
