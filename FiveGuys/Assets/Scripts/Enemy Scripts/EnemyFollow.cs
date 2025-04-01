@@ -14,8 +14,7 @@ public class EnemyFollow : MonoBehaviour
     public float speed;
     private Rigidbody rb;
     public AudioClip deathClip;
-
-    private PlayerScript playerScript;
+    public PlayerScript playerScript;
 
 
     private NavMeshAgent enemy;
@@ -28,14 +27,12 @@ public class EnemyFollow : MonoBehaviour
         enemy.speed = speed;
         enemyLives = maxEnemyLives;
         healthBar.SetMaxHealth(maxEnemyLives);
-        playerScript = GameObject.Find("Player(Clone)").GetComponent<PlayerScript>();
-
-        
+        playerScript = GetComponent<PlayerScript>();
         
     }
 
-// Update is called once per frame
-void Update()
+    // Update is called once per frame
+    void Update()
     {
         enemy.SetDestination(player.transform.position);
         WhatEnemyTypeAmI();
@@ -68,7 +65,8 @@ void Update()
         //base enemy
         if(enemyType == 0)
         {
-            maxEnemyLives = 3 * playerScript.charLevel;
+
+            maxEnemyLives = playerScript.charLevel * 3;
 
             if (enemyLives <= 0)
             {
@@ -81,7 +79,7 @@ void Update()
         else if (enemyType == 1)
         {
             enemy.speed = 3;
-            maxEnemyLives = 5 * playerScript.charLevel;
+            maxEnemyLives = playerScript.charLevel * 5;
 
             if (enemyLives <= 0)
             {
@@ -93,7 +91,7 @@ void Update()
         //rushdown enemy
         else if (enemyType == 2)
         {
-            maxEnemyLives = 2 * playerScript.charLevel;
+            maxEnemyLives = playerScript.charLevel * 2;
             enemy.speed = 10 - (enemyLives * 2);
 
             if (enemyLives <= 0)
@@ -106,19 +104,7 @@ void Update()
         else if (enemyType == 3)
         {
             
-            maxEnemyLives = 1;
-            enemy.speed = 12f;
-            Vector3 direction = transform.position - player.transform.position;
-            direction.Normalize();
-
-            rb.velocity = direction * enemy.speed;
-
-            if (enemyLives <= 0)
-            {
-                AudioSource.PlayClipAtPoint(deathClip, transform.position, .7f);
-                Destroy(this.gameObject);
-                GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().EarnXP(2);
-            }
+            
         }
     }
 

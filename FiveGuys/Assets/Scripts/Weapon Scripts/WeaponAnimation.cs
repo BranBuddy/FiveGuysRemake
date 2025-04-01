@@ -50,8 +50,9 @@ public class WeaponAnimation : MonoBehaviour
     IEnumerator ResetCooldown()
     {
         yield return new WaitForSeconds(attackCooldown);
-        weapon.gameObject.SetActive(false);
+        
         CanAttack = true;
+        weapon.gameObject.SetActive(false);
     }
 
     
