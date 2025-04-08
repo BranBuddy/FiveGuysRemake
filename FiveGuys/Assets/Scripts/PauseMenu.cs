@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class PauseMenu : MonoBehaviour
 
     // Bool to track if the game is paused
     private bool isPaused = false;
+
+    // Name of the main menu scene
+    [SerializeField] private string mainMenuSceneName = "MainMenu";
 
     void Start()
     {
@@ -61,5 +65,12 @@ public class PauseMenu : MonoBehaviour
 
         // Update the pause state
         isPaused = true;
+    }
+
+    public void ReturnToMainMenu()
+    {
+        // Resume time before loading menu
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 }
