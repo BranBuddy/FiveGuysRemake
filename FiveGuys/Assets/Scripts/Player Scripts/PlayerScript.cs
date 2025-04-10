@@ -10,19 +10,25 @@ using Cinemachine;
 
 public class PlayerScript : MonoBehaviour
 {
-     private float horizontalInput;
-     private float verticalInput;
-    public float speed = 5f;
-    public float lives = 3f;
-    public float maxLives = 3f;
+   private float horizontalInput;
+   private float verticalInput;
+
+    public float speed;
+    public float lives;
+    public float maxLives;
     public float minXP = 0f;
     public float maxSprint = 1f;
+
     public float sprint;
     public float xp;
+
     public bool autoFire;
     public GameObject bulletPrefab;
+
     public int charLevel;
     public float sprintCost;
+
+    public int whatCharacterAmI;
 
     private SaveData saveData;
 
@@ -46,6 +52,8 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
+        speed = 3;
+        maxLives = 2;
         charLevel = 1;
         levelUpText.text = "Level: " + charLevel;
         xp = minXP;
@@ -127,7 +135,7 @@ public class PlayerScript : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.LeftShift) || sprint <= 0)
         {
-            speed = 6f;
+            speed *= .5f;
             running = false;
 
         }
@@ -226,6 +234,11 @@ public class PlayerScript : MonoBehaviour
             lives += healthGained;
             healthBar.SetHealth(lives);
         }
+    }
+
+    public void ChangeSpeed(int amount)
+    {
+        speed += amount;
     }
 
 }

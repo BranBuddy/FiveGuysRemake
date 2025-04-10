@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
+    public GameObject select;
+
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void Settings()
@@ -17,6 +19,11 @@ public class MainMenu : MonoBehaviour
     public void BackToMain()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 3);
+    }
+
+    public void SelectToMain()
+    {
+        select.SetActive(false);
     }
 
     public void QuitGame()

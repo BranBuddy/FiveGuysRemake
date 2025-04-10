@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5856129468007175504}
   - component: {fileID: 8638967416446669291}
   - component: {fileID: 3319874567713151425}
+  - component: {fileID: 4577230522395633547}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -134,7 +135,9 @@ MonoBehaviour:
   xp: 0
   autoFire: 1
   bulletPrefab: {fileID: 6640773669498251117, guid: a4a0fd3044432db419595bcaf62ab478, type: 3}
+  charLevel: 0
   sprintCost: 0.1
+  whatCharacterAmI: 0
   levelUpClip: {fileID: 8300000, guid: 079684a180a65a441a781cb9452962c5, type: 3}
   bulletClip: {fileID: 8300000, guid: 3e09d5d0d5656404cad5fc95599f5daa, type: 3}
   healthBar: {fileID: 1157123819732972008}
@@ -210,6 +213,18 @@ MonoBehaviour:
   CanAttack: 1
   attackCooldown: 0.5
   weaponHolder: {fileID: 2663891026656204114}
+--- !u!114 &4577230522395633547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072373346703047333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 030fff05f11c36a4c83de5a29de56207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2663891026656204114
 GameObject:
   m_ObjectHideFlags: 0
