@@ -14,7 +14,8 @@ public class EnemyFollow : MonoBehaviour
     public float speed;
     private Rigidbody rb;
     public AudioClip deathClip;
-    public PlayerScript playerScript;
+    private PlayerScript playerScript;
+    
 
 
     private NavMeshAgent enemy;
@@ -28,6 +29,8 @@ public class EnemyFollow : MonoBehaviour
         enemyLives = maxEnemyLives;
         healthBar.SetMaxHealth(maxEnemyLives);
         playerScript = GetComponent<PlayerScript>();
+        
+        
         
     }
 
@@ -66,32 +69,35 @@ public class EnemyFollow : MonoBehaviour
         if(enemyType == 0)
         {
 
-            maxEnemyLives = playerScript.charLevel * 3;
+            maxEnemyLives = 3;
 
             if (enemyLives <= 0)
             {
                 AudioSource.PlayClipAtPoint(deathClip, transform.position, .7f);
                 Destroy(this.gameObject);
                 GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().EarnXP(.5f);
+                
             }
         }
         //tank enemy
         else if (enemyType == 1)
         {
             enemy.speed = 3;
-            maxEnemyLives = playerScript.charLevel * 5;
+            maxEnemyLives =  5;
 
             if (enemyLives <= 0)
             {
                 AudioSource.PlayClipAtPoint(deathClip, transform.position, .7f);
                 Destroy(this.gameObject);
                 GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().EarnXP(1f);
+                
+                
             }
         }
         //rushdown enemy
         else if (enemyType == 2)
         {
-            maxEnemyLives = playerScript.charLevel * 2;
+            maxEnemyLives =  2;
             enemy.speed = 10 - (enemyLives * 2);
 
             if (enemyLives <= 0)
@@ -99,6 +105,7 @@ public class EnemyFollow : MonoBehaviour
                 AudioSource.PlayClipAtPoint(deathClip, transform.position, .7f);
                 Destroy(this.gameObject);
                 GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().EarnXP(1.5f);
+                
             }
         }
         else if (enemyType == 3)

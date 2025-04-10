@@ -24,6 +24,7 @@ public class PlayerScript : MonoBehaviour
     public int charLevel;
     public float sprintCost;
 
+    private SaveData saveData;
 
     public AudioClip levelUpClip;
     public AudioClip bulletClip;
