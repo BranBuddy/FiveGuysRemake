@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using System.Security.Cryptography;
-using Cinemachine;
 
 public class PlayerScript : MonoBehaviour
 {
-   private float horizontalInput;
-   private float verticalInput;
+    public delegate void OnPlayerDamaged(float damageAmount);
+    public static event OnPlayerDamaged PlayerDamagedEvent;
+
+    private float horizontalInput;
+    private float verticalInput;
 
     public float speed;
     public float lives;
@@ -29,8 +29,6 @@ public class PlayerScript : MonoBehaviour
     public float sprintCost;
 
     public int whatCharacterAmI;
-
-    private SaveData saveData;
 
     public AudioClip levelUpClip;
     public AudioClip bulletClip;
@@ -60,23 +58,18 @@ public class PlayerScript : MonoBehaviour
         lives = maxLives;
         autoFire = false;
 
-
         healthBar.SetMaxHealth(maxLives);
         xpBar.SetMinXP(minXP);
         sprintBar.SetSprint(sprint);
-
-
-
     }
-   
+
     // Update is called once per frame
     void Update()
     {
         Movement();
-
         Sprinting();
 
-        if (running == true)
+        if (running)
         {
             sprint -= sprintCost * Time.deltaTime;
 
@@ -87,12 +80,11 @@ public class PlayerScript : MonoBehaviour
 
             sprintBar.SetSprint(sprint);
 
-           if(recharge != null)
+            if (recharge != null)
             {
                 StopCoroutine(recharge);
             }
-           recharge = StartCoroutine(RechargeSprint());
-
+            recharge = StartCoroutine(RechargeSprint());
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && !autoFire)
@@ -110,14 +102,12 @@ public class PlayerScript : MonoBehaviour
             StopCoroutine("Autofire");
         }
     }
-    
-    //moves player
+
     void Movement()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * Time.deltaTime * speed);
-
     }
 
     void Sprinting()
@@ -125,22 +115,15 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             speed *= 1.5f;
-
             sprint -= sprintCost;
-
             running = true;
-            Debug.Log(sprint);
-
             sprintBar.SetSprint(sprint);
         }
         if (Input.GetKeyUp(KeyCode.LeftShift) || sprint <= 0)
         {
-            speed *= .5f;
+            speed *= 0.5f;
             running = false;
-
         }
-
-
     }
 
     private IEnumerator RechargeSprint()
@@ -154,69 +137,60 @@ public class PlayerScript : MonoBehaviour
                 sprint = maxSprint;
             }
             sprintBar.SetSprint(sprint);
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
-    //does damage to player in 1/3 increments
+    // Event
     public void Damage(float damageAmount)
     {
         lives -= damageAmount;
         healthBar.SetHealth(lives);
+
+        PlayerDamagedEvent?.Invoke(damageAmount);
 
         if (lives <= 0)
         {
             Destroy(this.gameObject);
             StartCoroutine(WaitForDeath());
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            
-
         }
     }
 
     public void EarnXP(float xpAmount)
     {
-        xp = xp + ((xpAmount / charLevel) * .5f);
+        xp += (xpAmount / charLevel) * 0.5f;
         xpBar.SetXP(xp);
 
         if (xp >= 1)
         {
             xp = minXP;
             xpBar.SetXP(xp);
-            Debug.Log("lEVEL UP");
             LevelUp();
-            AudioSource.PlayClipAtPoint(levelUpClip, transform.position, .7f);
-
+            AudioSource.PlayClipAtPoint(levelUpClip, transform.position, 0.7f);
         }
     }
 
     public void LevelUp()
     {
-
-        if (charLevel > 1)
-        {
-            charLevel++;
-            levelUpText.text = "Level: " + charLevel;
-
-        } else
-        {
-            charLevel = 2;
-            levelUpText.text = "Level: " + charLevel;
-        }
+        charLevel++;
+        levelUpText.text = "Level: " + charLevel;
     }
 
     void ShootbulletPrefab()
     {
-        Instantiate(bulletPrefab, transform.position, transform.rotation); 
-        AudioSource.PlayClipAtPoint(bulletClip, transform.position, .7f);
+        Instantiate(bulletPrefab, transform.position, transform.rotation);
+        AudioSource.PlayClipAtPoint(bulletClip, transform.position, 0.7f);
     }
+
     IEnumerator Autofire()
     {
-        while (true)
+        GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
+
+        while (enemy != null)
         {
             Instantiate(bulletPrefab, transform.position, transform.rotation);
-            AudioSource.PlayClipAtPoint(bulletClip, transform.position, .7f);
-            //Debug.Log("Fired");
+            AudioSource.PlayClipAtPoint(bulletClip, transform.position, 0.7f);
             yield return new WaitForSeconds(0.5f);
         }
     }
@@ -224,7 +198,6 @@ public class PlayerScript : MonoBehaviour
     IEnumerator WaitForDeath()
     {
         yield return new WaitForSeconds(3f);
-        
     }
 
     public void HealPlayer(int healthGained)
@@ -240,5 +213,5 @@ public class PlayerScript : MonoBehaviour
     {
         speed += amount;
     }
-
 }
+
