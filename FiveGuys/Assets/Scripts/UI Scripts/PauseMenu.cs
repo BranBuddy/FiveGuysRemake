@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
@@ -48,7 +49,12 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
-    private void Pause()
+    public void StartGame()
+    {
+        Resume();
+    }
+
+    public void Pause()
     {
         // Enable the pause menu UI
         if (pauseMenuUI != null)

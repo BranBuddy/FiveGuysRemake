@@ -2541,7 +2541,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2020110037}
         m_TargetAssemblyTypeName: PlayerSelect, Assembly-CSharp
         m_MethodName: SelectPlayerThree
         m_Mode: 1
@@ -5028,7 +5028,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2020110037}
         m_TargetAssemblyTypeName: PlayerSelect, Assembly-CSharp
         m_MethodName: SelectPlayerOne
         m_Mode: 1
@@ -5453,6 +5453,17 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &1446087425 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2015522526156420600, guid: 3d24f1b1b9047504ba5d0c3c66d3c103, type: 3}
+  m_PrefabInstance: {fileID: 525391498}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446087421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4be2e011ef417ed448d1ba21942c90fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1541910532
 GameObject:
   m_ObjectHideFlags: 0
@@ -5676,7 +5687,7 @@ GameObject:
   - component: {fileID: 1559222797}
   - component: {fileID: 1559222796}
   m_Layer: 5
-  m_Name: Back
+  m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5746,9 +5757,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: SelectToMain
+      - m_Target: {fileID: 1889688239}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1446087425}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6605,6 +6628,7 @@ GameObject:
   - component: {fileID: 2020110036}
   - component: {fileID: 2020110035}
   - component: {fileID: 2020110034}
+  - component: {fileID: 2020110037}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -6673,6 +6697,18 @@ RectTransform:
   m_AnchoredPosition: {x: -7.1119385, y: 2.8319092}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2020110037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020110033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 030fff05f11c36a4c83de5a29de56207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2023625670 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6144844075128576330, guid: 30d56c92219ff2741957a4f4ec7843d5, type: 3}
@@ -7292,7 +7328,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2020110037}
         m_TargetAssemblyTypeName: PlayerSelect, Assembly-CSharp
         m_MethodName: SelectPlayerTwo
         m_Mode: 1
