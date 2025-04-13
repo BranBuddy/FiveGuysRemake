@@ -212,7 +212,9 @@ public class PlayerScript : MonoBehaviour
     }
     IEnumerator Autofire()
     {
-        while (true)
+        GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
+
+        while (true && enemy != null)
         {
             Instantiate(bulletPrefab, transform.position, transform.rotation);
             AudioSource.PlayClipAtPoint(bulletClip, transform.position, .7f);
