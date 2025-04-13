@@ -9,7 +9,7 @@ public class PlayerSelect : MonoBehaviour
     private int whatCharacterAmI;
     void Start()
     {
-        player = GetComponent<PlayerScript>();
+  
     }
 
     // Update is called once per frame
@@ -18,43 +18,22 @@ public class PlayerSelect : MonoBehaviour
         
     }
 
-    public void WhatPlayerAmI()
-    {
-        if (whatCharacterAmI == 0)
-        {
-            player.maxLives = 3;
-            player.speed = 5f;
-        }
-        else if (whatCharacterAmI == 1)
-        {
-            player.maxLives = 2;
-            GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().ChangeSpeed(7);
-            
-        }
-        else if (whatCharacterAmI == 2)
-        {
-            player.maxLives = 5;
-            player.speed = 3f;
-        }
-
-    }
-
     public void SelectPlayerOne()
     {
-        whatCharacterAmI = 0;
-        Debug.Log(whatCharacterAmI);
+        GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().maxLives = 3;
+        GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().speed = 7;
     }
 
     public void SelectPlayerTwo()
     {
-        whatCharacterAmI = 1;
-        Debug.Log(whatCharacterAmI);
-        
+        GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().maxLives = 1;
+        GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().speed = 10;
+
     }
 
     public void SelectPlayerThree()
     {
-        whatCharacterAmI = 2;
-        Debug.Log(whatCharacterAmI);
+        GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().maxLives = 5;
+        GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().speed = 5;
     }
 }

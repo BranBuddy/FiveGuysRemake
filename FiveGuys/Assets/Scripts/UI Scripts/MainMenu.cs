@@ -5,10 +5,18 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject select;
+    private PauseMenu menu;
+
+    private void Start()
+    {
+        menu = GetComponent<PauseMenu>();
+    }
 
     public void PlayGame()
     {
+        menu.Pause();
         SceneManager.LoadScene("SampleScene");
+
     }
 
     public void Settings()
@@ -30,4 +38,6 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    
 }
