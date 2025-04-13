@@ -25,8 +25,6 @@ public class BulletScript : MonoBehaviour
         {
             targetEnemies = GameObject.FindGameObjectsWithTag(enemyTag);
 
-            if (targetEnemies == null) DeleteSelf();
-
             foreach (GameObject enemy in targetEnemies)
             {
                 float distance = Vector3.Distance(transform.position, enemy.transform.position);
@@ -42,16 +40,24 @@ public class BulletScript : MonoBehaviour
         }
         else
         {
-            Vector3 mouseScreenPosition = Input.mousePosition;
-            Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
+            try
             {
-                mouseWorldPosition = hit.point;
-            }
+                Vector3 mouseScreenPosition = Input.mousePosition;
+                Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
+                RaycastHit hit;
 
-            movement = Vector3.Normalize(mouseWorldPosition - transform.position);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    mouseWorldPosition = hit.point + Vector3.up;
+                }
+
+                movement = Vector3.Normalize(mouseWorldPosition - transform.position);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogException(e);
+                throw;
+            }
         }
 
         movement = movement * Time.deltaTime * bulletSpeed;
