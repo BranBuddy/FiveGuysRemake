@@ -187,7 +187,8 @@ public class PlayerScript : MonoBehaviour
     {
         GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
 
-        while (enemy != null)
+        while (true && enemy != null)
+
         {
             Instantiate(bulletPrefab, transform.position, transform.rotation);
             AudioSource.PlayClipAtPoint(bulletClip, transform.position, 0.7f);
