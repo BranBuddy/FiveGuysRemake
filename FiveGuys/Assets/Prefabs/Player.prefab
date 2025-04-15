@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 3753665278524192808}
   - component: {fileID: 5856129468007175504}
   - component: {fileID: 8638967416446669291}
+  - component: {fileID: 3319874567713151425}
+  - component: {fileID: 4577230522395633547}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -133,7 +135,9 @@ MonoBehaviour:
   xp: 0
   autoFire: 1
   bulletPrefab: {fileID: 6640773669498251117, guid: a4a0fd3044432db419595bcaf62ab478, type: 3}
+  charLevel: 0
   sprintCost: 0.1
+  whatCharacterAmI: 0
   levelUpClip: {fileID: 8300000, guid: 079684a180a65a441a781cb9452962c5, type: 3}
   bulletClip: {fileID: 8300000, guid: 3e09d5d0d5656404cad5fc95599f5daa, type: 3}
   healthBar: {fileID: 1157123819732972008}
@@ -193,6 +197,34 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3319874567713151425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072373346703047333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e013f142eacafa648a4f8532971c4b69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 8736661624135057884}
+  CanAttack: 1
+  attackCooldown: 0.5
+  weaponHolder: {fileID: 2663891026656204114}
+--- !u!114 &4577230522395633547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072373346703047333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 030fff05f11c36a4c83de5a29de56207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2663891026656204114
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7673833643387917088}
-  - component: {fileID: 844930149135549257}
+  - component: {fileID: 3802197805693896864}
   m_Layer: 0
   m_Name: WeaponHolder
   m_TagString: Untagged
@@ -226,7 +258,7 @@ Transform:
   - {fileID: 3926087375039828886}
   m_Father: {fileID: 2299896039211029876}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &844930149135549257
+--- !u!114 &3802197805693896864
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,14 +267,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2663891026656204114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 439c4a89a4c7fed4cbdb164330053c64, type: 3}
+  m_Script: {fileID: 11500000, guid: e013f142eacafa648a4f8532971c4b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
   weapon: {fileID: 8736661624135057884}
   CanAttack: 1
-  attackCooldown: 1
-  enemyTag: Enemy
+  attackCooldown: 0.5
   weaponHolder: {fileID: 2663891026656204114}
 --- !u!1 &7778505815469485224
 GameObject:
@@ -362,6 +392,7 @@ GameObject:
   - component: {fileID: 1978570302617632059}
   - component: {fileID: 272083254819751905}
   - component: {fileID: 8931807598740504781}
+  - component: {fileID: 5321480802406651714}
   m_Layer: 0
   m_Name: Weapon_Basic
   m_TagString: Weapon
@@ -488,6 +519,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4befcb3ebbf9bf443a002b454384b467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponType: 0
+--- !u!54 &5321480802406651714
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8736661624135057884}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &736331962823290880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -562,7 +621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1638068819020070706, guid: 79a4f802410103849b3dcfbc2f24dada, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -86
+      value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 1638068819020070706, guid: 79a4f802410103849b3dcfbc2f24dada, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -702,7 +761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6449556548754063289, guid: 4983de399686e2d489e1cbfe894d8355, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 180.4
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6449556548754063289, guid: 4983de399686e2d489e1cbfe894d8355, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -835,7 +894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4740979805124512590, guid: de17614a0b249db4abdaa5feee6d3b38, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 180.4
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4740979805124512590, guid: de17614a0b249db4abdaa5feee6d3b38, type: 3}
       propertyPath: m_AnchoredPosition.y
