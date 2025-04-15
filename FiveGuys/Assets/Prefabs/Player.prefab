@@ -126,16 +126,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ca9c3a412b775439b550b0776073f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  lives: 3
+  speed: 7
+  lives: 1
   maxLives: 3
   minXP: 0
   maxSprint: 1
   sprint: 1
-  xp: 0
+  xp: 0.083333336
   autoFire: 1
   bulletPrefab: {fileID: 6640773669498251117, guid: a4a0fd3044432db419595bcaf62ab478, type: 3}
-  charLevel: 0
+  charLevel: 1
   sprintCost: 0.1
   whatCharacterAmI: 0
   levelUpClip: {fileID: 8300000, guid: 079684a180a65a441a781cb9452962c5, type: 3}
@@ -639,6 +639,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: XPBar
       objectReference: {fileID: 0}
+    - target: {fileID: 6859971735190650704, guid: 79a4f802410103849b3dcfbc2f24dada, type: 3}
+      propertyPath: m_text
+      value: 'Level: 6'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7364363941850538183, guid: 79a4f802410103849b3dcfbc2f24dada, type: 3}
+      propertyPath: m_Value
+      value: 0.083333336
+      objectReference: {fileID: 0}
     - target: {fileID: 8203264960655320340, guid: 79a4f802410103849b3dcfbc2f24dada, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -693,6 +701,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 713289734643914667, guid: 4983de399686e2d489e1cbfe894d8355, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 950109432900527485, guid: 4983de399686e2d489e1cbfe894d8355, type: 3}
+      propertyPath: m_Value
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4248603730888455362, guid: 4983de399686e2d489e1cbfe894d8355, type: 3}

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static Cinemachine.DocumentationSortingAttribute;
 
 public class EnemyFollow : MonoBehaviour
 {
@@ -10,115 +9,138 @@ public class EnemyFollow : MonoBehaviour
     public EnemyHealthBar healthBar;
     public float enemyLives;
     public float maxEnemyLives;
-    public int enemyType;
-    public float speed;
-    private Rigidbody rb;
+    public EnemyType enemyType;
+    public float speed = 5f;
     public AudioClip deathClip;
-    private PlayerScript playerScript;
-    
-
+    public float deathVolume = 0.7f;
 
     private NavMeshAgent enemy;
-    // Start is called before the first frame update
+    private PlayerScript playerScript;
+
+    public enum EnemyType
+    {
+        Base,
+        Tank,
+        Rushdown
+    }
+
     void Start()
     {
-        speed = 5f;
+        // Initialize components
         enemy = GetComponent<NavMeshAgent>();
-        rb = GetComponent<Rigidbody>();
-        enemy.speed = speed;
+
+        // Find the player object by tag
+        player = GameObject.FindGameObjectWithTag("Player");
+        Debug.Log("Player found");
+
+        if (player != null)
+        {
+            playerScript = player.GetComponent<PlayerScript>();
+        }
+
+        // Initialize stats based on enemy type
+        InitializeEnemyStats();
         enemyLives = maxEnemyLives;
         healthBar.SetMaxHealth(maxEnemyLives);
-        playerScript = GetComponent<PlayerScript>();
-        
-        
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
-        enemy.SetDestination(player.transform.position);
-        WhatEnemyTypeAmI();
+        // Move enemy towards player if player is set
+        if (player != null)
+        {
+            enemy.SetDestination(player.transform.position);
+        }
 
-
+        HandleEnemyBehavior();
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && enemyType == 0)
+        // Handle interactions with the player
+        if (other.CompareTag("Player") && playerScript != null)
         {
-            GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().Damage(1);
-        }
-        else if (other.tag == "Player" && enemyType == 1)
-        {
-            GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().Damage(2);
-        }
-        else if (other.tag == "Player" && enemyType == 2)
-        {
-            GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().Damage(.5f);
-        }
-        else if (other.tag == "Player" && enemyType == 3)
-        {
-
-        }
-    }
-
-    public void WhatEnemyTypeAmI()
-    {
-        //base enemy
-        if(enemyType == 0)
-        {
-
-            maxEnemyLives = 3;
-
-            if (enemyLives <= 0)
+            switch (enemyType)
             {
-                AudioSource.PlayClipAtPoint(deathClip, transform.position, .7f);
-                Destroy(this.gameObject);
-                GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().EarnXP(.5f);
-                
+                case EnemyType.Base:
+                    playerScript.Damage(1);
+                    break;
+                case EnemyType.Tank:
+                    playerScript.Damage(2);
+                    break;
+                case EnemyType.Rushdown:
+                    playerScript.Damage(0.5f);
+                    break;
             }
-        }
-        //tank enemy
-        else if (enemyType == 1)
-        {
-            enemy.speed = 3;
-            maxEnemyLives =  5;
-
-            if (enemyLives <= 0)
-            {
-                AudioSource.PlayClipAtPoint(deathClip, transform.position, .7f);
-                Destroy(this.gameObject);
-                GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().EarnXP(1f);
-                
-                
-            }
-        }
-        //rushdown enemy
-        else if (enemyType == 2)
-        {
-            maxEnemyLives =  2;
-            enemy.speed = 10 - (enemyLives * 2);
-
-            if (enemyLives <= 0)
-            {
-                AudioSource.PlayClipAtPoint(deathClip, transform.position, .7f);
-                Destroy(this.gameObject);
-                GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().EarnXP(1.5f);
-                
-            }
-        }
-        else if (enemyType == 3)
-        {
-            
-            
         }
     }
 
-    public void enemyDamaged(int howMuch)
+    private void InitializeEnemyStats()
     {
-        enemyLives -= howMuch;
+        // Set enemy stats based on enemy type
+        switch (enemyType)
+        {
+            case EnemyType.Base:
+                maxEnemyLives = 3;
+                speed = 5f;
+                break;
+            case EnemyType.Tank:
+                maxEnemyLives = 5;
+                speed = 3f;
+                break;
+            case EnemyType.Rushdown:
+                maxEnemyLives = 2;
+                break;
+        }
+
+        if (enemy != null)
+        {
+            enemy.speed = speed;
+        }
+    }
+
+    private void HandleEnemyBehavior()
+    {
+        // Handle enemy behavior when health reaches 0
+        if (enemyLives <= 0)
+        {
+            Die();
+        }
+
+        // For Rushdown enemy type, adjust speed based on health
+        if (enemyType == EnemyType.Rushdown)
+        {
+            enemy.speed = Mathf.Max(3f, 10f - (enemyLives * 2));
+        }
+    }
+
+    private void Die()
+    {
+        // Play death sound and give XP to player
+        AudioSource.PlayClipAtPoint(deathClip, transform.position, deathVolume);
+        if (playerScript != null)
+        {
+            switch (enemyType)
+            {
+                case EnemyType.Base:
+                    playerScript.EarnXP(0.5f);
+                    break;
+                case EnemyType.Tank:
+                    playerScript.EarnXP(1f);
+                    break;
+                case EnemyType.Rushdown:
+                    playerScript.EarnXP(1.5f);
+                    break;
+            }
+        }
+
+        Destroy(gameObject);
+    }
+
+    // Method to handle enemy damage
+    public void TakeDamage(int amount)
+    {
+        enemyLives -= amount;
         healthBar.SetHealth(enemyLives);
-
     }
 }

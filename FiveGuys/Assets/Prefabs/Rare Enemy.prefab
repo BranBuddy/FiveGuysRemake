@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 852814291541882618, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c6d6cd8c541785a4793e21f195a8fd99, type: 2}
     - target: {fileID: 1408666061756518588, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -31,6 +35,10 @@ PrefabInstance:
     - target: {fileID: 1901544721662038112, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049208485379336208, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
+      propertyPath: speed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2049208485379336208, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
       propertyPath: enemyType

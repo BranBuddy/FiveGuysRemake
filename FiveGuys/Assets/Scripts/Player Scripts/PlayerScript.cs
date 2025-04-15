@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -13,93 +12,77 @@ public class PlayerScript : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
 
-    public float speed;
+    [Header("Movement")]
+    public float baseSpeed = 3f;
+    public float sprintMultiplier = 1.5f;
+    private float currentSpeed;
+
+    [Header("Player Stats")]
     public float lives;
     public float maxLives;
-    public float minXP = 0f;
-    public float maxSprint = 1f;
-
     public float sprint;
-    public float xp;
+    public float maxSprint = 1f;
+    public float sprintCost = 0.2f;
+    public float chargeRate = 0.2f;
 
+    [Header("XP and Level")]
+    public float xp;
+    public float minXP = 0f;
+    public int charLevel = 1;
+
+    [Header("Abilities")]
     public bool autoFire;
     public GameObject bulletPrefab;
-
-    public int charLevel;
-    public float sprintCost;
-
     public int whatCharacterAmI;
 
-    public AudioClip levelUpClip;
-    public AudioClip bulletClip;
-
+    [Header("UI")]
     public Healthbar healthBar;
     public XPBar xpBar;
     public SprintBar sprintBar;
-
     public Image stamina;
-
-    public Vector2 turn;
-
     public TextMeshProUGUI levelUpText;
 
-    public bool running;
+    [Header("Audio")]
+    public AudioClip levelUpClip;
+    public AudioClip bulletClip;
 
+    private bool running;
     private Coroutine recharge;
-    public float chargeRate;
+    private PlayerScript playerScript;
 
     void Start()
     {
-        speed = 3;
-        maxLives = 2;
-        charLevel = 1;
-        levelUpText.text = "Level: " + charLevel;
-        xp = minXP;
+        currentSpeed = baseSpeed;
         lives = maxLives;
+        sprint = maxSprint;
         autoFire = false;
+        xp = minXP;
+        charLevel = 1;
 
         healthBar.SetMaxHealth(maxLives);
         xpBar.SetMinXP(minXP);
+        xpBar.SetXP(xp);
         sprintBar.SetSprint(sprint);
+        levelUpText.text = "Level: " + charLevel;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Movement();
         Sprinting();
 
-        if (running)
-        {
-            sprint -= sprintCost * Time.deltaTime;
-
-            if (sprint == 0)
-            {
-                sprint = 0;
-            }
-
-            sprintBar.SetSprint(sprint);
-
-            if (recharge != null)
-            {
-                StopCoroutine(recharge);
-            }
-            recharge = StartCoroutine(RechargeSprint());
-        }
-
         if (Input.GetKeyDown(KeyCode.Mouse0) && !autoFire)
         {
-            ShootbulletPrefab();
+            ShootBullet();
         }
-        else if (Input.GetKeyDown(KeyCode.E) && !autoFire)
+        else if (Input.GetKeyDown(KeyCode.E))
         {
-            autoFire = true;
-            StartCoroutine("Autofire");
-        }
-        else if (Input.GetKeyDown(KeyCode.E) && autoFire)
-        {
-            autoFire = false;
-            StopCoroutine("Autofire");
+            autoFire = !autoFire;
+
+            if (autoFire)
+                StartCoroutine(Autofire());
+            else
+                StopCoroutine(Autofire());
         }
     }
 
@@ -107,41 +90,50 @@ public class PlayerScript : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * Time.deltaTime * speed);
+        Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
+        transform.Translate(direction * currentSpeed * Time.deltaTime);
     }
 
     void Sprinting()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && sprint > 0)
         {
-            speed *= 1.5f;
-            sprint -= sprintCost;
+            currentSpeed = baseSpeed * sprintMultiplier;
             running = true;
-            sprintBar.SetSprint(sprint);
         }
+
         if (Input.GetKeyUp(KeyCode.LeftShift) || sprint <= 0)
         {
-            speed *= 0.5f;
+            currentSpeed = baseSpeed;
             running = false;
+        }
+
+        if (running)
+        {
+            sprint -= sprintCost * Time.deltaTime;
+            sprint = Mathf.Clamp(sprint, 0, maxSprint);
+            sprintBar.SetSprint(sprint);
+
+            if (recharge != null)
+                StopCoroutine(recharge);
+
+            recharge = StartCoroutine(RechargeSprint());
         }
     }
 
     private IEnumerator RechargeSprint()
     {
         yield return new WaitForSeconds(1f);
-        while (sprint < maxSprint)
+
+        while (sprint < maxSprint && !running)
         {
-            sprint += chargeRate / 10f;
-            if (sprint > maxSprint)
-            {
-                sprint = maxSprint;
-            }
+            sprint += chargeRate * Time.deltaTime;
+            sprint = Mathf.Clamp(sprint, 0, maxSprint);
             sprintBar.SetSprint(sprint);
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
         }
     }
 
-    // Event
     public void Damage(float damageAmount)
     {
         lives -= damageAmount;
@@ -151,7 +143,7 @@ public class PlayerScript : MonoBehaviour
 
         if (lives <= 0)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             StartCoroutine(WaitForDeath());
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
@@ -164,20 +156,19 @@ public class PlayerScript : MonoBehaviour
 
         if (xp >= 1)
         {
-            xp = minXP;
-            xpBar.SetXP(xp);
+            xp = 0;
             LevelUp();
             AudioSource.PlayClipAtPoint(levelUpClip, transform.position, 0.7f);
         }
     }
 
-    public void LevelUp()
+    private void LevelUp()
     {
         charLevel++;
         levelUpText.text = "Level: " + charLevel;
     }
 
-    void ShootbulletPrefab()
+    void ShootBullet()
     {
         Instantiate(bulletPrefab, transform.position, transform.rotation);
         AudioSource.PlayClipAtPoint(bulletClip, transform.position, 0.7f);
@@ -185,10 +176,7 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator Autofire()
     {
-        GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
-
-        while (true && enemy != null)
-
+        while (autoFire)
         {
             Instantiate(bulletPrefab, transform.position, transform.rotation);
             AudioSource.PlayClipAtPoint(bulletClip, transform.position, 0.7f);
@@ -212,7 +200,7 @@ public class PlayerScript : MonoBehaviour
 
     public void ChangeSpeed(int amount)
     {
-        speed += amount;
+        baseSpeed += amount;
+        currentSpeed = baseSpeed;
     }
 }
-

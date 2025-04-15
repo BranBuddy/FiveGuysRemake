@@ -168,7 +168,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 0e3fe7fe02371c241b098833bd263764, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -232,6 +232,7 @@ MonoBehaviour:
   enemyType: 0
   speed: 0
   deathClip: {fileID: 8300000, guid: d4951a63a24d3d0448be77d870fd5b19, type: 3}
+  deathVolume: 0.7
 --- !u!195 &8837403279728674190
 NavMeshAgent:
   m_ObjectHideFlags: 0
