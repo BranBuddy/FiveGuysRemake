@@ -769,8 +769,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start Game
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8a11d9317732a7e4cbe102c6c3b68a36, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8a11d9317732a7e4cbe102c6c3b68a36, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3699,8 +3699,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Select Character
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8a11d9317732a7e4cbe102c6c3b68a36, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8a11d9317732a7e4cbe102c6c3b68a36, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4631,8 +4631,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Select Character
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8a11d9317732a7e4cbe102c6c3b68a36, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8a11d9317732a7e4cbe102c6c3b68a36, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4870,8 +4870,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Select Character
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8a11d9317732a7e4cbe102c6c3b68a36, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8a11d9317732a7e4cbe102c6c3b68a36, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7385,6 +7385,7 @@ SceneRoots:
   - {fileID: 680900508}
   - {fileID: 980884792}
   - {fileID: 44355469}
+  - {fileID: 1889688245}
   - {fileID: 525391498}
   - {fileID: 353906567}
   - {fileID: 1235401782}
@@ -7394,5 +7395,4 @@ SceneRoots:
   - {fileID: 905505688}
   - {fileID: 1617457326}
   - {fileID: 207521691}
-  - {fileID: 1889688245}
   - {fileID: 348176045}
