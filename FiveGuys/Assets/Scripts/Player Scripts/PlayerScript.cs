@@ -24,6 +24,8 @@ public class PlayerScript : MonoBehaviour
 
     public bool autoFire;
     public GameObject bulletPrefab;
+    public GameObject rocketPrefab;
+    private float rocketCooldown = 1f;
 
     public int charLevel;
     public float sprintCost;
@@ -33,8 +35,8 @@ public class PlayerScript : MonoBehaviour
     public AudioClip levelUpClip;
     public AudioClip bulletClip;
 
-    public Healthbar healthBar;
-    public XPBar xpBar;
+    public HealthBar1 healthBar;
+    public XPBar1 xpBar;
     public SprintBar sprintBar;
 
     public Image stamina;
@@ -88,18 +90,28 @@ public class PlayerScript : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && !autoFire)
-        {
+        { // shoot bullet manual
             ShootbulletPrefab();
         }
         else if (Input.GetKeyDown(KeyCode.E) && !autoFire)
-        {
+        { // start auto shooting bullets
             autoFire = true;
             StartCoroutine("Autofire");
         }
         else if (Input.GetKeyDown(KeyCode.E) && autoFire)
-        {
+        { // stop auto shooting bullets
             autoFire = false;
             StopCoroutine("Autofire");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z) && rocketCooldown <= 0f)
+        { // Shoot rocket and reset cooldown
+            ShootRocketPrefab();
+            rocketCooldown = 1f;
+        }
+        else if (rocketCooldown > 0f)
+        { // reduce cooldown
+            rocketCooldown -= Time.deltaTime;
         }
     }
 
@@ -178,9 +190,14 @@ public class PlayerScript : MonoBehaviour
     }
 
     void ShootbulletPrefab()
-    {
+    { // Creates bullet and plays sound
         Instantiate(bulletPrefab, transform.position, transform.rotation);
         AudioSource.PlayClipAtPoint(bulletClip, transform.position, 0.7f);
+    }
+
+    void ShootRocketPrefab()
+    { // Creates rocket
+        Instantiate(rocketPrefab, transform.position, transform.rotation);
     }
 
     IEnumerator Autofire()
