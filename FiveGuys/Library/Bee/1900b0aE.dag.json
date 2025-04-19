@@ -31778,8 +31778,13 @@
       "Annotation": "WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp",
       "DisplayName": "Writing Assembly-CSharp.rsp",
       "ActionType": "WriteFile",
+<<<<<<< HEAD
       "PayloadOffset": 2250013,
       "PayloadLength": 32975,
+=======
+      "PayloadOffset": 2199375,
+      "PayloadLength": 34342,
+>>>>>>> main
       "PayloadDebugContentSnippet": "-target:library\n-out:\"Library/",
       "Inputs": [],
       "Outputs": [
@@ -31791,7 +31796,11 @@
       "Annotation": "WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp2",
       "DisplayName": "Writing Assembly-CSharp.rsp2",
       "ActionType": "WriteFile",
+<<<<<<< HEAD
       "PayloadOffset": 2283075,
+=======
+      "PayloadOffset": 2233804,
+>>>>>>> main
       "PayloadLength": 0,
       "PayloadDebugContentSnippet": "",
       "Inputs": [],
@@ -32068,12 +32077,14 @@
         "Assets/Scripts/SaveData.cs",
         "Assets/Scripts/UI Scripts/EndScreen.cs",
         "Assets/Scripts/UI Scripts/EnemyHealthBar.cs",
-        "Assets/Scripts/UI Scripts/Healthbar.cs",
+        "Assets/Scripts/UI Scripts/HealthBar1.cs",
         "Assets/Scripts/UI Scripts/MainMenu.cs",
         "Assets/Scripts/UI Scripts/PauseMenu.cs",
         "Assets/Scripts/UI Scripts/SprintBar.cs",
-        "Assets/Scripts/UI Scripts/XPBar.cs",
+        "Assets/Scripts/UI Scripts/XPBar1.cs",
         "Assets/Scripts/Weapon Scripts/BulletScript.cs",
+        "Assets/Scripts/Weapon Scripts/ExplosionScript.cs",
+        "Assets/Scripts/Weapon Scripts/RocketScript.cs",
         "Assets/Scripts/Weapon Scripts/WeaponAnimation.cs",
         "Assets/Scripts/Weapon Scripts/WeaponCollision.cs",
         "C:/Program Files/Unity 2022.3.37f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll",
@@ -32363,8 +32374,13 @@
       "Annotation": "WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll.mvfrm.rsp",
       "DisplayName": "Writing Assembly-CSharp.dll.mvfrm.rsp",
       "ActionType": "WriteFile",
+<<<<<<< HEAD
       "PayloadOffset": 2283171,
       "PayloadLength": 11142,
+=======
+      "PayloadOffset": 2233900,
+      "PayloadLength": 10360,
+>>>>>>> main
       "PayloadDebugContentSnippet": "Library\\Bee\\artifacts\\mvdfrm\\U",
       "Inputs": [],
       "Outputs": [

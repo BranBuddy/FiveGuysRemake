@@ -1,108 +1,95 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    // Initialization
     public string enemyTag = "Enemy";
-    private Vector3 targetPosition;
-    private Vector3 movementDirection;
-
-    public float bulletSpeed = 1f;
+    private GameObject[] targetEnemies;
+    private Vector3 targetEnemyPosition;
+    private Vector3 mouseWorldPosition;
+    private Vector3 movement;
+    private float smallestDistance = Mathf.Infinity;
     public bool autoFire;
-
+    public float bulletSpeed = 5f;
     private Rigidbody rb;
-
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        // Get autofire state from player
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player != null)
-        {
-            PlayerScript playerScript = player.GetComponent<PlayerScript>();
-            if (playerScript != null)
-            {
-                autoFire = playerScript.autoFire;
-            }
-        }
-
-        bool hasTarget = false;
-
-        // Determine bullet target
+        autoFire = GameObject.FindWithTag("Player").GetComponent<PlayerScript>().autoFire; 
+        // finds enemy
         if (autoFire)
-        {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
-            GameObject closestEnemy = null;
-            float closestDistance = Mathf.Infinity;
+        { // set enemies in array if auto firing
+            targetEnemies = GameObject.FindGameObjectsWithTag(enemyTag);
 
-            foreach (GameObject enemy in enemies)
-            {
+            foreach (GameObject enemy in targetEnemies)
+            { // get distance to each enemy
                 float distance = Vector3.Distance(transform.position, enemy.transform.position);
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    closestEnemy = enemy;
+
+                if (distance < smallestDistance)
+                { // change target enemy to closest
+                    smallestDistance = distance;
+                    targetEnemyPosition = enemy.transform.position;
                 }
             }
-
-            if (closestEnemy != null)
-            {
-                targetPosition = closestEnemy.transform.position;
-                hasTarget = true;
-            }
+            
+            // get direction
+            movement = Vector3.Normalize(targetEnemyPosition - transform.position);
         }
         else
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            try
+            { // get mouse position using raycast
+                Vector3 mouseScreenPosition = Input.mousePosition;
+                Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit))
+                { // get world position
+                    mouseWorldPosition = hit.point + Vector3.up;
+                }
+
+                // get direction
+                movement = Vector3.Normalize(mouseWorldPosition - transform.position);
+            }
+            catch (System.Exception e)
             {
-                targetPosition = hit.point + Vector3.up; // aim slightly above hit point
-                hasTarget = true;
+                Debug.LogException(e);
+                throw;
             }
         }
 
-        if (hasTarget)
-        {
-            // Calculate movement direction
-            movementDirection = (targetPosition - transform.position).normalized;
-            // Destroy bullet after 3 seconds if it doesn't hit anything
-            Invoke(nameof(DeleteSelf), 3f);
-        }
-        else
-        {
-            // No target, destroy immediately to prevent rogue bullets
-            Debug.Log("No enemy found, bullet destroyed.");
-            Destroy(gameObject);
-        }
+        // set speed
+        movement = movement * Time.deltaTime * bulletSpeed;
+
+        // delete bullet if not hitting
+        Invoke("DeleteSelf", 3f);
     }
 
-    void FixedUpdate()
-    {
-        if (movementDirection != Vector3.zero)
-        {
-            rb.MovePosition(rb.position + movementDirection * bulletSpeed * Time.fixedDeltaTime);
-        }
+    void LateUpdate()
+    { // move bullet
+        rb.MovePosition(transform.position + movement);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(enemyTag))
-        {
-            // Attempt to damage the enemy
-            EnemyFollow enemy = other.GetComponent<EnemyFollow>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(1); // Use updated method
-            }
-
-            DeleteSelf();
-        }
+    void DeleteSelf()
+    { // delete bullet
+        Destroy(this.gameObject);
     }
 
-    private void DeleteSelf()
+    void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        if (other.tag == enemyTag)
+        { // damage enemy if hitting enemy
+            other.GetComponent<EnemyFollow>().enemyDamaged(1);            
+        }
+
+        if (other.tag != "Player")
+        { // destory self when hitting something that's not player
+            Destroy(other.gameObject);
+        }
     }
 }
