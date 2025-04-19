@@ -49,7 +49,7 @@ public class ExplosionScript : MonoBehaviour
     {
         if (other.tag == enemyTag)
         { // damage enemy if touching
-            other.GetComponent<EnemyFollow>().enemyDamaged(1);
+            other.GetComponent<EnemyFollow>().TakeDamage(1);
         }
     }
 }

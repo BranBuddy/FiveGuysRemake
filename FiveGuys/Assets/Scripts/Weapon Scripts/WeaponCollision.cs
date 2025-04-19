@@ -4,33 +4,39 @@ using UnityEngine;
 
 public class WeaponCollision : MonoBehaviour
 {
-    [SerializeField] private int weaponType;
+    [SerializeField] private WeaponType weaponType = WeaponType.Melee;
 
-    void Start()
+    public enum WeaponType
     {
-        
+        Melee,
+        Ranged,    // Add more types as needed
+        Magic
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    void whatWeaponAmI()
-    {
-        if (weaponType == 0)
+        if (other.CompareTag("Enemy"))
         {
+            EnemyFollow enemy = other.GetComponent<EnemyFollow>();
+            if (enemy != null)
+            {
+                switch (weaponType)
+                {
+                    case WeaponType.Melee:
+                        enemy.TakeDamage(1);
+                        break;
 
-        }
-    }
+                    case WeaponType.Ranged:
+                        enemy.TakeDamage(2);
+                        break;
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.tag == "Enemy" && weaponType == 0)
-        {
+                    case WeaponType.Magic:
+                        enemy.TakeDamage(3); // Example
+                        break;
 
-            collision.gameObject.GetComponent<EnemyFollow>().enemyDamaged(1);
+                        // Add more types if needed
+                }
+            }
         }
     }
 }

@@ -84,7 +84,7 @@ public class BulletScript : MonoBehaviour
     {
         if (other.tag == enemyTag)
         { // damage enemy if hitting enemy
-            other.GetComponent<EnemyFollow>().enemyDamaged(1);            
+            other.GetComponent<EnemyFollow>().TakeDamage(1);            
         }
 
         if (other.tag != "Player")
