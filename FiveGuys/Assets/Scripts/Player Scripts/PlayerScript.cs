@@ -23,7 +23,8 @@ public class PlayerScript : MonoBehaviour
     public float xp;
 
     public bool autoFire;
-    public GameObject bulletPrefab;
+    public BulletPool bulletPool;
+
     public GameObject rocketPrefab;
     private float rocketCooldown = 1f;
 
@@ -63,6 +64,8 @@ public class PlayerScript : MonoBehaviour
         healthBar.SetMaxHealth(maxLives);
         xpBar.SetMinXP(minXP);
         sprintBar.SetSprint(sprint);
+
+        bulletPool = GameObject.Find("GameManager").GetComponent<BulletPool>();
     }
 
     // Update is called once per frame
@@ -191,7 +194,8 @@ public class PlayerScript : MonoBehaviour
 
     void ShootbulletPrefab()
     { // Creates bullet and plays sound
-        Instantiate(bulletPrefab, transform.position, transform.rotation);
+        GameObject bullet = bulletPool.GetObject();
+        bullet.transform.position = transform.position;
         AudioSource.PlayClipAtPoint(bulletClip, transform.position, 0.7f);
     }
 
@@ -207,7 +211,8 @@ public class PlayerScript : MonoBehaviour
         while (true && enemy != null)
 
         {
-            Instantiate(bulletPrefab, transform.position, transform.rotation);
+            GameObject bullet = bulletPool.GetObject();
+            bullet.transform.position = transform.position;
             AudioSource.PlayClipAtPoint(bulletClip, transform.position, 0.7f);
             yield return new WaitForSeconds(0.5f);
         }

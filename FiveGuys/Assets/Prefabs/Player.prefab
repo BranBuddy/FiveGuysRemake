@@ -134,7 +134,7 @@ MonoBehaviour:
   sprint: 1
   xp: 0
   autoFire: 1
-  bulletPrefab: {fileID: 6640773669498251117, guid: a4a0fd3044432db419595bcaf62ab478, type: 3}
+  bulletPool: {fileID: 0}
   rocketPrefab: {fileID: 8543373804032905257, guid: b1c33cf581483f844910f4b45e7cfc1d, type: 3}
   charLevel: 0
   sprintCost: 0.1
@@ -640,6 +640,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: XPBar
       objectReference: {fileID: 0}
+    - target: {fileID: 6859971735190650704, guid: 79a4f802410103849b3dcfbc2f24dada, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 7b1efa6320816524e89f4e398ce8f140, type: 2}
+    - target: {fileID: 6859971735190650704, guid: 79a4f802410103849b3dcfbc2f24dada, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 7b1efa6320816524e89f4e398ce8f140, type: 2}
     - target: {fileID: 7364363941850538183, guid: 79a4f802410103849b3dcfbc2f24dada, type: 3}
       propertyPath: m_Value
       value: 1

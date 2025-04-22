@@ -16,9 +16,12 @@ public class BulletScript : MonoBehaviour
     public bool autoFire;
     public float bulletSpeed = 5f;
     private Rigidbody rb;
+
+    public BulletPool bulletPool;
     
     void Start()
     {
+        bulletPool = GameObject.Find("GameManager").GetComponent<BulletPool>();
         rb = GetComponent<Rigidbody>();
         autoFire = GameObject.FindWithTag("Player").GetComponent<PlayerScript>().autoFire; 
         // finds enemy
@@ -76,8 +79,8 @@ public class BulletScript : MonoBehaviour
     }
 
     void DeleteSelf()
-    { // delete bullet
-        Destroy(this.gameObject);
+    { // return bullet to pool
+        bulletPool.ReturnObject(gameObject);
     }
 
     void OnTriggerEnter(Collider other)
