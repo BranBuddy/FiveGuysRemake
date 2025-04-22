@@ -193,6 +193,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8123172551163463633, guid: a46911d5dd37e8043bb4318345d769c9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 249818519}
+    - targetCorrespondingSourceObject: {fileID: 8123172551163463633, guid: a46911d5dd37e8043bb4318345d769c9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 249818520}
   m_SourcePrefab: {fileID: 100100000, guid: a46911d5dd37e8043bb4318345d769c9, type: 3}
 --- !u!1 &249818518 stripped
 GameObject:
@@ -213,6 +216,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 0}
   mainMenuSceneName: MainMenu
+--- !u!114 &249818520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249818518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313d5a1471b495d438193dcbb15403c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 6640773669498251117, guid: a4a0fd3044432db419595bcaf62ab478, type: 3}
+  poolSize: 20
 --- !u!43 &290259605
 Mesh:
   m_ObjectHideFlags: 0
