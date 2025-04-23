@@ -7,6 +7,7 @@ public class PlayerSelect : MonoBehaviour
 {
     private PlayerScript player;
     private int whatCharacterAmI;
+    public GameObject player_;
     void Start()
     {
   
@@ -35,5 +36,11 @@ public class PlayerSelect : MonoBehaviour
     {
         GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().maxLives = 5;
         GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().speed = 5;
+    }
+
+    public void StartGame()
+    {
+        GameObject.Find("Player(Clone)").transform.GetChild(0).gameObject.SetActive(true);
+
     }
 }

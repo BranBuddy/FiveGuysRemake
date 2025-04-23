@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEditor.Build;
 using UnityEngine;
 
@@ -84,12 +85,12 @@ public class BulletScript : MonoBehaviour
     {
         if (other.tag == enemyTag)
         { // damage enemy if hitting enemy
-            other.GetComponent<EnemyFollow>().TakeDamage(1);            
+            other.GetComponent<EnemyFollow>().TakeDamage(GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().damageDealt);            
         }
 
         if (other.tag != "Player")
         { // destory self when hitting something that's not player
-            Destroy(other.gameObject);
+            Destroy(gameObject);
         }
     }
 }
