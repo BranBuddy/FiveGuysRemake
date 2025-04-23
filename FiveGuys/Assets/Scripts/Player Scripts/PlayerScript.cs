@@ -19,6 +19,8 @@ public class PlayerScript : MonoBehaviour
     public float minXP = 0f;
     public float maxSprint = 1f;
 
+    internal float damageDealt;
+
     public float sprint;
     public float xp;
 
@@ -47,6 +49,7 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI levelUpText;
 
     public bool running;
+    public bool leveledUp;
 
     private Coroutine recharge;
     public float chargeRate;
@@ -58,8 +61,10 @@ public class PlayerScript : MonoBehaviour
         charLevel = 1;
         levelUpText.text = "Level: " + charLevel;
         xp = minXP;
+        damageDealt = 1;
         lives = maxLives;
         autoFire = false;
+        leveledUp = false;
 
         healthBar.SetMaxHealth(maxLives);
         xpBar.SetMinXP(minXP);
@@ -73,6 +78,8 @@ public class PlayerScript : MonoBehaviour
     {
         Movement();
         Sprinting();
+
+        Debug.Log(xp);
 
         if (running)
         {
@@ -182,6 +189,7 @@ public class PlayerScript : MonoBehaviour
             xp = minXP;
             xpBar.SetXP(xp);
             LevelUp();
+            GameObject.Find("Canvas").GetComponent<Upgrades>().Upgrade();
             AudioSource.PlayClipAtPoint(levelUpClip, transform.position, 0.7f);
         }
     }
@@ -191,6 +199,8 @@ public class PlayerScript : MonoBehaviour
         charLevel++;
         levelUpText.text = "Level: " + charLevel;
     }
+
+    
 
     void ShootbulletPrefab()
     { // Creates bullet and plays sound

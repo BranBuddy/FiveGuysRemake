@@ -73,6 +73,11 @@ public class EnemyFollow : MonoBehaviour
                     break;
             }
         }
+
+        if(other.tag == "Weapon" && enemyLives <= 0)
+        {
+            Die();
+        }
     }
 
     private void InitializeEnemyStats()
@@ -81,15 +86,15 @@ public class EnemyFollow : MonoBehaviour
         switch (enemyType)
         {
             case EnemyType.Base:
-                maxEnemyLives = 3;
+                maxEnemyLives = playerScript.charLevel * 3;
                 speed = 5f;
                 break;
             case EnemyType.Tank:
-                maxEnemyLives = 5;
+                maxEnemyLives = playerScript.charLevel * 5;
                 speed = 3f;
                 break;
             case EnemyType.Rushdown:
-                maxEnemyLives = 2;
+                maxEnemyLives = playerScript.charLevel * 2;
                 break;
         }
 
@@ -101,11 +106,6 @@ public class EnemyFollow : MonoBehaviour
 
     private void HandleEnemyBehavior()
     {
-        // Handle enemy behavior when health reaches 0
-        if (enemyLives <= 0)
-        {
-            Die();
-        }
 
         // For Rushdown enemy type, adjust speed based on health
         if (enemyType == EnemyType.Rushdown)
@@ -118,8 +118,7 @@ public class EnemyFollow : MonoBehaviour
     {
         // Play death sound and give XP to player
         AudioSource.PlayClipAtPoint(deathClip, transform.position, deathVolume);
-        if (playerScript != null)
-        {
+ 
             switch (enemyType)
             {
                 case EnemyType.Base:
@@ -127,18 +126,20 @@ public class EnemyFollow : MonoBehaviour
                     break;
                 case EnemyType.Tank:
                     playerScript.EarnXP(1f);
+                    Debug.Log("s");
                     break;
                 case EnemyType.Rushdown:
                     playerScript.EarnXP(1.5f);
                     break;
             }
-        }
+        
 
         Destroy(gameObject);
     }
 
+ 
     // Method to handle enemy damage
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         enemyLives -= amount;
         healthBar.SetHealth(enemyLives);
