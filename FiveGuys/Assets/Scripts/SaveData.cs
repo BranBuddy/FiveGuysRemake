@@ -4,47 +4,26 @@ using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SaveData : MonoBehaviour
+public static class SaveData
 {
-    public Profile profile = new Profile();
-    private string path;
+    private static string path => Application.persistentDataPath + "/ProfileData.json";
 
-    private void Awake()
+    public static void SaveToJson(Profile profile)
     {
-        path = Application.persistentDataPath + "/ProfileData.json";
+        string json = JsonUtility.ToJson(profile);
+        File.WriteAllText(path, json);
     }
 
-    private void Start()
+    public static Profile LoadFromJson()
     {
-        LoadFromJson();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (File.Exists(path))
         {
-            SaveToJson();
+            string json = File.ReadAllText(path);
+            return JsonUtility.FromJson<Profile>(json);
         }
-    }
-
-    public void SaveToJson()
-    {
-        string profileData = JsonUtility.ToJson(profile);
-        string filePath = Application.persistentDataPath + "/ProfileData.json";
-        Debug.Log(filePath);
-
-        File.WriteAllText(filePath, profileData);
-        Debug.Log("Created");
-    }
-
-    public void LoadFromJson()
-    {
-        if (!File.Exists(path))
+        else
         {
-            string profileData = File.ReadAllText(path);
-            profile = JsonUtility.FromJson<Profile>(profileData);
-            GetComponent<PermanentUpgrades>().LoadUpgrades(profile.coins, profile.damageUpgrades, profile.healthUpgrades, profile.expGainUpgrades);
-            Debug.Log("Loaded");
+            return new Profile();
         }
     }
 }

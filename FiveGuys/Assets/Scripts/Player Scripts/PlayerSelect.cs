@@ -8,7 +8,6 @@ public class PlayerSelect : MonoBehaviour
     private PlayerScript player;
     private int whatCharacterAmI;
     public GameObject player_;
-    public Profile profile;
 
     private int playerTwoUnlock = 500;
     private int playerThreeUnlock = 1000;
@@ -31,7 +30,7 @@ public class PlayerSelect : MonoBehaviour
 
     public void SelectPlayerTwo()
     {
-        if (profile.kills >= playerTwoUnlock)
+        if (SaveManager.instance.profile.kills >= playerTwoUnlock)
         {
             GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().maxLives = 1;
             GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().speed = 10;
@@ -42,7 +41,7 @@ public class PlayerSelect : MonoBehaviour
 
     public void SelectPlayerThree()
     {
-        if (profile.kills >= playerThreeUnlock)
+        if (SaveManager.instance.profile.kills >= playerThreeUnlock)
         {
             GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().maxLives = 5;
             GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().speed = 5;
