@@ -27,7 +27,7 @@ PrefabInstance:
     - target: {fileID: 2049208485379336208, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1072373346703047333, guid: bd4481214d1781f4db16b3e788f9412d, type: 3}
+      objectReference: {fileID: 167128337019466223, guid: b619d1f665a7bcb40977b91cf9371331, type: 3}
     - target: {fileID: 2049208485379336208, guid: bf663a62379913b4eb4f16a78b17e5f0, type: 3}
       propertyPath: enemyType
       value: 1

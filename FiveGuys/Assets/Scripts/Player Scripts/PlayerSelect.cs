@@ -23,12 +23,14 @@ public class PlayerSelect : MonoBehaviour
     {
         GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().maxLives = 3;
         GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().speed = 7;
+        GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().meshRenderer.material = GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().materials[0];
     }
 
     public void SelectPlayerTwo()
     {
         GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().maxLives = 1;
         GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().speed = 10;
+        GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().meshRenderer.material = GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().materials[1];
 
     }
 
@@ -36,6 +38,7 @@ public class PlayerSelect : MonoBehaviour
     {
         GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().maxLives = 5;
         GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().speed = 5;
+        GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().meshRenderer.material = GameObject.Find("Player(Clone)").GetComponent<PlayerScript>().materials[2];
     }
 
     public void StartGame()
