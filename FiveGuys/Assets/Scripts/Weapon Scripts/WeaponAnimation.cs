@@ -9,10 +9,11 @@ public class WeaponAnimation : MonoBehaviour
     public bool CanAttack = true;
     public float attackCooldown = .5f;
     public GameObject weaponHolder;
+    private Animator animator;
 
     void Start()
     {
-
+        animator = GameObject.Find("Player(Clone)").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -43,6 +44,7 @@ public class WeaponAnimation : MonoBehaviour
         
         Animator anim = weapon.GetComponent<Animator>();
         anim.SetTrigger("Attack");
+        animator.SetTrigger("Attack");
         StartCoroutine(ResetCooldown());
 
     }
@@ -50,8 +52,10 @@ public class WeaponAnimation : MonoBehaviour
     IEnumerator ResetCooldown()
     {
         yield return new WaitForSeconds(attackCooldown);
-        
+        Animator anim = weapon.GetComponent<Animator>();
         CanAttack = true;
+        animator.ResetTrigger("Attack");
+        anim.ResetTrigger("Attack");
         weapon.gameObject.SetActive(false);
     }
 
