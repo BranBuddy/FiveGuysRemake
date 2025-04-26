@@ -17,6 +17,8 @@ public class EnemyFollow : MonoBehaviour
     private NavMeshAgent enemy;
     private PlayerScript playerScript;
 
+    public Profile profile;
+
     public enum EnemyType
     {
         Base,
@@ -132,7 +134,8 @@ public class EnemyFollow : MonoBehaviour
                     playerScript.EarnXP(1.5f);
                     break;
             }
-        
+
+        profile.kills++;
 
         Destroy(gameObject);
     }

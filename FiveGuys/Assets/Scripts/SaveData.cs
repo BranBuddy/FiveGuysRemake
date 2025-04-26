@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SaveData : MonoBehaviour
 {
-    private Profile profile = new Profile();
+    public Profile profile = new Profile();
     private string path;
 
     private void Awake()
@@ -52,6 +52,7 @@ public class SaveData : MonoBehaviour
 [System.Serializable]
 public class Profile
 {
+    public int kills = 0;
     public int coins = 0;
     public int healthUpgrades = 0;
     public int damageUpgrades = 0;
