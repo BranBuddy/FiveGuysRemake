@@ -21,11 +21,14 @@ public class PlayerScript : MonoBehaviour
 
     internal float damageDealt;
 
+    internal MeshRenderer meshRenderer;
+    public Material[] materials;
+
     public float sprint;
     public float xp;
 
     public bool autoFire;
-    public BulletPool bulletPool;
+    private BulletPool bulletPool;
 
     public GameObject rocketPrefab;
     private float rocketCooldown = 1f;
@@ -38,6 +41,8 @@ public class PlayerScript : MonoBehaviour
     public AudioClip levelUpClip;
     public AudioClip bulletClip;
 
+    private Animator animator;
+
     public HealthBar1 healthBar;
     public XPBar1 xpBar;
     public SprintBar sprintBar;
@@ -47,6 +52,8 @@ public class PlayerScript : MonoBehaviour
     public Vector2 turn;
 
     public TextMeshProUGUI levelUpText;
+
+    private float rotationSpeed;
 
     public bool running;
     public bool leveledUp;
@@ -65,6 +72,14 @@ public class PlayerScript : MonoBehaviour
         lives = maxLives;
         autoFire = false;
         leveledUp = false;
+
+        rotationSpeed = 5;
+
+        meshRenderer = this.transform.GetComponent<MeshRenderer>();
+
+        meshRenderer.material = materials[0];
+
+        animator = GetComponent<Animator>();
 
         healthBar.SetMaxHealth(maxLives);
         xpBar.SetMinXP(minXP);
@@ -129,7 +144,19 @@ public class PlayerScript : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * Time.deltaTime * speed);
+        Vector3 movement = new Vector3(horizontalInput, 0, verticalInput) * Time.deltaTime * speed;
+        transform.Translate(movement);
+
+        if(movement == Vector3.zero)
+        {
+            animator.SetFloat("Speed", 0);
+        }
+        else
+        {
+            animator.SetFloat("Speed", 1);
+        }
+
+        
     }
 
     void Sprinting()
