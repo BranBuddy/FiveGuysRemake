@@ -132,7 +132,8 @@ public class EnemyFollow : MonoBehaviour
                     playerScript.EarnXP(1.5f);
                     break;
             }
-        
+
+        SaveManager.instance.profile.kills++;
 
         Destroy(gameObject);
     }

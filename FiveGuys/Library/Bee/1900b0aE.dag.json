@@ -29394,8 +29394,13 @@
       "Annotation": "WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp",
       "DisplayName": "Writing Assembly-CSharp.rsp",
       "ActionType": "WriteFile",
+<<<<<<< HEAD
       "PayloadOffset": 2208483,
       "PayloadLength": 34381,
+=======
+      "PayloadOffset": 2199375,
+      "PayloadLength": 34413,
+>>>>>>> main
       "PayloadDebugContentSnippet": "-target:library\n-out:\"Library/",
       "Inputs": [],
       "Outputs": [
@@ -29407,7 +29412,11 @@
       "Annotation": "WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp2",
       "DisplayName": "Writing Assembly-CSharp.rsp2",
       "ActionType": "WriteFile",
+<<<<<<< HEAD
       "PayloadOffset": 2242951,
+=======
+      "PayloadOffset": 2233875,
+>>>>>>> main
       "PayloadLength": 0,
       "PayloadDebugContentSnippet": "",
       "Inputs": [],
@@ -29673,6 +29682,7 @@
         "Assets/Scripts/Player Scripts/PlayerSelect.cs",
         "Assets/Scripts/RandomGenerate.cs",
         "Assets/Scripts/SaveData.cs",
+        "Assets/Scripts/SaveManager.cs",
         "Assets/Scripts/UI Scripts/EndScreen.cs",
         "Assets/Scripts/UI Scripts/EnemyHealthBar.cs",
         "Assets/Scripts/UI Scripts/HealthBar1.cs",
@@ -29974,7 +29984,11 @@
       "Annotation": "WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll.mvfrm.rsp",
       "DisplayName": "Writing Assembly-CSharp.dll.mvfrm.rsp",
       "ActionType": "WriteFile",
+<<<<<<< HEAD
       "PayloadOffset": 2243047,
+=======
+      "PayloadOffset": 2233971,
+>>>>>>> main
       "PayloadLength": 10360,
       "PayloadDebugContentSnippet": "Library\\Bee\\artifacts\\mvdfrm\\U",
       "Inputs": [],
