@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.ProBuilder;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -273,5 +274,30 @@ public class PlayerScript : MonoBehaviour
     {
         speed += amount;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Freezer"))
+        {
+            speed -= 5;
+        }
+        if (other.CompareTag("Puddle"))
+        {
+            speed += 5;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Freezer"))
+        {
+            speed += 5;
+        }
+        if (other.CompareTag("Puddle"))
+        {
+            speed -= 5;
+        }
+    }
+
 }
 
