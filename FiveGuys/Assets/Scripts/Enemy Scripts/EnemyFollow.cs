@@ -14,6 +14,8 @@ public class EnemyFollow : MonoBehaviour
     public AudioClip deathClip;
     public float deathVolume = 0.7f;
 
+    private Animator animator;
+
     private NavMeshAgent enemy;
     private PlayerScript playerScript;
 
@@ -26,6 +28,8 @@ public class EnemyFollow : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
+
         // Initialize components
         enemy = GetComponent<NavMeshAgent>();
 
@@ -42,6 +46,8 @@ public class EnemyFollow : MonoBehaviour
         InitializeEnemyStats();
         enemyLives = maxEnemyLives;
         healthBar.SetMaxHealth(maxEnemyLives);
+
+        animator.SetBool("canSeePlayer", true);
     }
 
     void Update()
@@ -52,6 +58,8 @@ public class EnemyFollow : MonoBehaviour
             enemy.SetDestination(player.transform.position);
         }
 
+
+        healthBar.SetHealth(enemyLives);
         HandleEnemyBehavior();
     }
 
@@ -72,11 +80,26 @@ public class EnemyFollow : MonoBehaviour
                     playerScript.Damage(0.5f);
                     break;
             }
+
+            
         }
 
-        if(other.tag == "Weapon" && enemyLives <= 0)
+        if (other.CompareTag("Freezer"))
+        {
+            speed -= 5;
+        }
+
+        if (other.tag == "Weapon" && enemyLives <= 0)
         {
             Die();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Freezer"))
+        {
+            speed += 5;
         }
     }
 
