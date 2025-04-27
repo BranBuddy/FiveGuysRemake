@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 7e3db8bc7f11db04d9a69adf0d8bdf6f
   - enabled: 1
+    path: Assets/Scenes/Whitebox.unity
+    guid: bc347da4e8afcd942a906d1e0eb4e56b
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
-    guid: bce7a9339ba8e264b80c51a82a9aec70
+    guid: 4512425d7d689394aba3c494a249badf
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
+    guid: 4f36911e16d68b747bfffb529773d2d0
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: c583d1780206ebd46a0ad5c16b353d07
   m_configObjects: {}
