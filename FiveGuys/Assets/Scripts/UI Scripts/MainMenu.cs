@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
     {
        
         SceneManager.LoadScene("WhiteBox");
-        Time.timeScale = 0;
+        StartCoroutine(LoadScene());
        
 
     }
@@ -37,5 +37,10 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    private IEnumerator LoadScene()
+    {
+        yield return new WaitForSeconds(1);
+        Time.timeScale = 0;
+    }
     
 }

@@ -6456,8 +6456,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start Game
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7b1efa6320816524e89f4e398ce8f140, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 7b1efa6320816524e89f4e398ce8f140, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12616,8 +12616,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Select Character
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7b1efa6320816524e89f4e398ce8f140, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 7b1efa6320816524e89f4e398ce8f140, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14092,8 +14092,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Select Character
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7b1efa6320816524e89f4e398ce8f140, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 7b1efa6320816524e89f4e398ce8f140, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15008,7 +15008,7 @@ MonoBehaviour:
   enemiesToSpawn:
   - {fileID: 534000000238329495, guid: e529ffbabca71e946bde60c76f896a92, type: 3}
   - {fileID: 6463904476309535802, guid: c6b94ce2b43182a44be74bb30bf6d3a4, type: 3}
-  - {fileID: 59581907303880268, guid: ba5a16b3796c32942b6f3d25e092651a, type: 3}
+  - {fileID: 6043393755233319574, guid: f9dfacc53c9159e44abcb44f60a48ec2, type: 3}
   spawnPointTag: SpawnPoint
   initialSpawnCount: 3
   cooldownTime: 5
@@ -17119,8 +17119,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Select Character
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7b1efa6320816524e89f4e398ce8f140, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 7b1efa6320816524e89f4e398ce8f140, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -17212,7 +17212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1592964572
 Transform:
   m_ObjectHideFlags: 0

@@ -76,7 +76,7 @@ public class Upgrades : MonoBehaviour
         if (rngUpgrade >= 41 && rngUpgrade < 61)
         {
             option.text = "Health";
-            playerScript.lives += 1f;
+            playerScript.maxLives *= 2f;
             UpgradeButton.onClick.AddListener(UpgradeHealth);
             Debug.Log(rngUpgrade);
 

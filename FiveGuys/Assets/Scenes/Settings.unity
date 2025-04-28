@@ -280,12 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxSlider: {fileID: 1466170328}
-  sfxSources:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  sfxSources: []
 --- !u!114 &118846878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,7 +294,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 1530024390}
-  musicSource: {fileID: 0}
 --- !u!1 &160624926
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +321,7 @@ RectTransform:
   m_GameObject: {fileID: 160624926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8.060501, y: 3.6603837, z: 1}
+  m_LocalScale: {x: 8.060501, y: 4.528627, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1356671844}
@@ -2768,7 +2762,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -317.6, y: 145.8}
+  m_AnchoredPosition: {x: -317.6, y: 188}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1788510716

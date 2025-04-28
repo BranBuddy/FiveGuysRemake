@@ -203,7 +203,7 @@ public class PlayerScript : MonoBehaviour
         {
             Destroy(this.gameObject);
             StartCoroutine(WaitForDeath());
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("EndScreen");
         }
     }
 

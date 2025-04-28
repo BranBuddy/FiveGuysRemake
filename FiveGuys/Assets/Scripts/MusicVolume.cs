@@ -7,7 +7,7 @@ public class MusicVolumeController : MonoBehaviour
     public Slider volumeSlider;
 
     [Header("Audio")]
-    public AudioSource musicSource;
+    private AudioSource musicSource;
 
     private void Start()
     {
