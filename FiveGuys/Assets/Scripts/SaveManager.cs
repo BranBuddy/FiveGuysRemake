@@ -12,12 +12,12 @@ public class SaveManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this.gameObject);
             profile = SaveData.LoadFromJson();
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 
