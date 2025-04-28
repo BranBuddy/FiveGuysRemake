@@ -54,8 +54,9 @@ public class RocketScript : MonoBehaviour
 
     private void OnTriggerEnter (Collider other)
     { // Explode when hitting something that's not player
-        if (other.tag == "Player")
+        if (other.tag != "Player")
         {
+            Debug.Log(other);
             Explode();
         }
     }
@@ -63,6 +64,7 @@ public class RocketScript : MonoBehaviour
     void Explode()
     { // destory self and create explosion
         Destroy(gameObject);
+        Debug.Log("Eplosde");
         Instantiate(explosionPrefab, transform.position, transform.rotation);
     }
 }

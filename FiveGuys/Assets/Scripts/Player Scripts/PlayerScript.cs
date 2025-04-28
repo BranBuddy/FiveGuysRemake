@@ -129,7 +129,7 @@ public class PlayerScript : MonoBehaviour
             StopCoroutine("Autofire");
         }
 
-        if (Input.GetKeyDown(KeyCode.Z) && rocketCooldown <= 0f)
+        if (Input.GetKeyDown(KeyCode.Z) && rocketCooldown == 0f)
         { // Shoot rocket and reset cooldown
             ShootRocketPrefab();
             rocketCooldown = 1f;
@@ -137,6 +137,7 @@ public class PlayerScript : MonoBehaviour
         else if (rocketCooldown > 0f)
         { // reduce cooldown
             rocketCooldown -= Time.deltaTime;
+            rocketCooldown = Mathf.Clamp01(rocketCooldown);
         }
     }
 
@@ -238,6 +239,7 @@ public class PlayerScript : MonoBehaviour
 
     void ShootRocketPrefab()
     { // Creates rocket
+        Debug.Log("SHot");
         Instantiate(rocketPrefab, transform.position, transform.rotation);
     }
 
