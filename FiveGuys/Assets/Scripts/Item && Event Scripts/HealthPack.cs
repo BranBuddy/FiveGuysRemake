@@ -7,10 +7,14 @@ public class HealthPack : MonoBehaviour
     public GameObject health;
     public AudioClip healthClip;
     private bool canGetHealth = true;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
+        animator = transform.GetChild(0).GetComponent<Animator>();
+
+        animator.SetTrigger("canMove");
 
     }
 

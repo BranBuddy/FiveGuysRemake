@@ -18,7 +18,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 950109432900527485, guid: 4983de399686e2d489e1cbfe894d8355, type: 3}
       propertyPath: m_Value
-      value: 3
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 950109432900527485, guid: 4983de399686e2d489e1cbfe894d8355, type: 3}
+      propertyPath: m_MaxValue
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1884209482922705338, guid: 4983de399686e2d489e1cbfe894d8355, type: 3}
       propertyPath: m_Color.b
@@ -186,6 +190,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1271351512272980517}
-  cam: {fileID: 0}
   target: {fileID: 8201752547272939284, guid: 0eafd8a76364f7f42b84da46588ef858, type: 3}
   offset: {x: 0, y: 0, z: 0}
